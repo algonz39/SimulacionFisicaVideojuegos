@@ -7,7 +7,7 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
-
+#include "Clases/Particle.h"
 #include <iostream>
 
 std::string display_text = "This is a test";
@@ -28,6 +28,7 @@ PxPvd*                  gPvd        = NULL;
 
 PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
+Particle*               particle    = NULL;
 ContactReportCallback gContactReportCallback;
 
 
@@ -54,6 +55,7 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
+	particle = new Particle({ 0,0,0 }, { 5,10,0 });
 	}
 
 
@@ -66,6 +68,7 @@ void stepPhysics(bool interactive, double t)
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
+	particle->integrate(t);
 }
 
 // Function to clean data
@@ -84,7 +87,10 @@ void cleanupPhysics(bool interactive)
 	transport->release();
 	
 	gFoundation->release();
-	}
+
+	delete particle;
+
+}
 
 // Function called when a key is pressed
 void keyPress(unsigned char key, const PxTransform& camera)
