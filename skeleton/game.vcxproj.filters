@@ -10,7 +10,12 @@
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="callbacks.cpp" />
-    <ClCompile Include="Clases\Particle.cpp" />
+    <ClCompile Include="Clases\Particle.cpp">
+      <Filter>Clases</Filter>
+    </ClCompile>
+    <ClCompile Include="Clases\ParticleGenerator.cpp">
+      <Filter>Clases</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -22,11 +27,19 @@
     </ClInclude>
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="callbacks.hpp" />
-    <ClInclude Include="Clases\Particle.h" />
+    <ClInclude Include="Clases\Particle.h">
+      <Filter>Clases</Filter>
+    </ClInclude>
+    <ClInclude Include="Clases\ParticleGenerator.h">
+      <Filter>Clases</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
       <UniqueIdentifier>{d04b4f9f-5a69-465e-8070-25c6d0bcd3c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clases">
+      <UniqueIdentifier>{08bbfa97-a2a1-4008-ba56-1e227f02c916}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

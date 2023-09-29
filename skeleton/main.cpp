@@ -7,7 +7,7 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
-#include "Clases/Particle.h"
+#include "Clases/ParticleGenerator.h"
 #include <iostream>
 
 std::string display_text = "This is a test";
@@ -28,7 +28,7 @@ PxPvd*                  gPvd        = NULL;
 
 PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
-Particle*               particle    = NULL;
+ParticleGenerator*      generator   = NULL;
 ContactReportCallback gContactReportCallback;
 
 
@@ -55,8 +55,8 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
-	particle = new Particle({ 0,0,0 }, { 5,10,0 });
-	}
+	generator = new ParticleGenerator();
+}
 
 
 // Function to configure what happens in each step of physics
@@ -68,7 +68,7 @@ void stepPhysics(bool interactive, double t)
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
-	particle->integrate(t);
+	generator->updateParticles(t);
 }
 
 // Function to clean data
@@ -88,7 +88,7 @@ void cleanupPhysics(bool interactive)
 	
 	gFoundation->release();
 
-	delete particle;
+	delete generator;
 
 }
 
@@ -101,6 +101,26 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 	//case 'B': break;
 	//case ' ':	break;
+	case 'Z':
+	{
+		generator->generateProjectile(generator->Pistol);
+		break;
+	}
+	case 'X':
+	{
+		generator->generateProjectile(generator->Artillery);
+		break;
+	}
+	case 'C':
+	{
+		generator->generateProjectile(generator->FireBall);
+		break;
+	}
+	case 'V':
+	{
+		generator->generateProjectile(generator->Laser);
+		break;
+	}
 	case ' ':
 	{
 		break;
