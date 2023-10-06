@@ -1,25 +1,17 @@
 #include "../core.hpp"
 #include "../RenderUtils.hpp"
-#include "Particle.h"
+#include "ParticleSystem.h"
 #include <vector>
 class ParticleGenerator
 {
 public:
-	enum ProjectileType {
-		Pistol,
-		Artillery,
-		FireBall,
-		Laser,
-		LastEnum
-	};
-	ParticleGenerator();
+	ParticleGenerator(Vector3 Pos, ParticleSystem* Sys, double Prob = 0.45);
 	~ParticleGenerator();
-	void generateProjectile(ProjectileType type);
-	void updateParticles(double t);
+	void generate(double t);
+
 
 private: 
-	std::vector<Particle*> particles;
-
-	int nParticles;
-	Camera* cam;
+	ParticleSystem* sys;
+	Vector3 pos;
+	double genProb;
 };

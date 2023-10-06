@@ -13,6 +13,9 @@
     <ClCompile Include="Clases\Particle.cpp">
       <Filter>Clases</Filter>
     </ClCompile>
+    <ClCompile Include="Clases\ParticleSystem.cpp">
+      <Filter>Clases</Filter>
+    </ClCompile>
     <ClCompile Include="Clases\ParticleGenerator.cpp">
       <Filter>Clases</Filter>
     </ClCompile>
@@ -28,6 +31,9 @@
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="Clases\Particle.h">
+      <Filter>Clases</Filter>
+    </ClInclude>
+    <ClInclude Include="Clases\ParticleSystem.h">
       <Filter>Clases</Filter>
     </ClInclude>
     <ClInclude Include="Clases\ParticleGenerator.h">

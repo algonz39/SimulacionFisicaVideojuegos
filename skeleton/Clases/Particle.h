@@ -14,7 +14,7 @@ private:
 	Vector3 acc;
 	float mass;
 	float lifeTime;
-	physx::PxTransform pose;
+	physx::PxTransform pos;
 	RenderItem* renderItem;
 	const double damp;
 };

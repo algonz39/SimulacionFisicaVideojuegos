@@ -7,7 +7,7 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
-#include "Clases/ParticleGenerator.h"
+#include "Clases/ParticleSystem.h"
 #include <iostream>
 
 std::string display_text = "This is a test";
@@ -28,7 +28,7 @@ PxPvd*                  gPvd        = NULL;
 
 PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
-ParticleGenerator*      generator   = NULL;
+ParticleSystem*      generator   = NULL;
 ContactReportCallback gContactReportCallback;
 
 
@@ -55,7 +55,7 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
-	generator = new ParticleGenerator();
+	generator = new ParticleSystem();
 }
 
 
