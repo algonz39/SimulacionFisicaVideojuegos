@@ -29,3 +29,8 @@ bool Particle::isDead()
 	return lifeTime <= 0;
 }
 
+void Particle::kill()
+{
+	lifeTime = 0;
+}
+

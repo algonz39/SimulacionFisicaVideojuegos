@@ -13,9 +13,11 @@ ParticleSystem::~ParticleSystem() {
 		if(p) delete p;
 	}
 	particles.clear();
+	nParticles = 0;
 }
 
 void ParticleSystem::generateProjectile(ProjectileType type) {
+	if (maxParticles()) return;
 	Vector3 pos = cam->getEye();
 	Vector3 vel = cam->getDir();
 	Vector3 grav = { 0, -1, 0 };
@@ -37,9 +39,7 @@ void ParticleSystem::generateProjectile(ProjectileType type) {
 	default:
 		break;
 	}
-	particles.push_back(projectile);
-	nParticles++;
-
+	addParticle(projectile);
 }
 
 void ParticleSystem::updateParticles(double t)
@@ -51,6 +51,7 @@ void ParticleSystem::updateParticles(double t)
 		if (p->isDead()) {
 			delete p;
 			iter = particles.erase(iter);
+			nParticles--;
 		}
 		else {
 			++iter;  // Avanza el iterador si el objeto no está muerto
@@ -77,5 +78,10 @@ void ParticleSystem::addGenerator(ParticleGenerator* g)
 	generators.push_back(g);
 	nGenerators++;
 
+}
+
+bool ParticleSystem::maxParticles()
+{
+	return nParticles >= MAX_PARTICLES;
 }
 
