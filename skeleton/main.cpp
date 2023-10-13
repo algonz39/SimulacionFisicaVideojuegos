@@ -7,6 +7,7 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
+#include "Clases/ParticleGenerator.h"
 #include "Clases/ParticleSystem.h"
 #include <iostream>
 
@@ -18,17 +19,17 @@ using namespace physx;
 PxDefaultAllocator		gAllocator;
 PxDefaultErrorCallback	gErrorCallback;
 
-PxFoundation*			gFoundation = NULL;
-PxPhysics*				gPhysics	= NULL;
+PxFoundation*			gFoundation = nullptr;
+PxPhysics*				gPhysics	= nullptr;
 
 
-PxMaterial*				gMaterial	= NULL;
+PxMaterial*				gMaterial	= nullptr;
 
-PxPvd*                  gPvd        = NULL;
+PxPvd*                  gPvd        = nullptr;
 
-PxDefaultCpuDispatcher*	gDispatcher = NULL;
-PxScene*				gScene      = NULL;
-ParticleSystem*      generator   = NULL;
+PxDefaultCpuDispatcher*	gDispatcher = nullptr;
+PxScene*				gScene      = nullptr;
+ParticleSystem*			pSystem	    = nullptr;
 ContactReportCallback gContactReportCallback;
 
 
@@ -55,7 +56,8 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
-	generator = new ParticleSystem();
+	pSystem = new ParticleSystem();
+	new ParticleGenerator({ 0,0,0 }, pSystem);
 }
 
 
@@ -68,7 +70,7 @@ void stepPhysics(bool interactive, double t)
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
-	generator->updateParticles(t);
+	pSystem->updateParticles(t);
 }
 
 // Function to clean data
@@ -88,7 +90,7 @@ void cleanupPhysics(bool interactive)
 	
 	gFoundation->release();
 
-	delete generator;
+	delete pSystem;
 
 }
 
@@ -103,22 +105,22 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	//case ' ':	break;
 	case 'Z':
 	{
-		generator->generateProjectile(generator->Pistol);
+		pSystem->generateProjectile(pSystem->Pistol);
 		break;
 	}
 	case 'X':
 	{
-		generator->generateProjectile(generator->Artillery);
+		pSystem->generateProjectile(pSystem->Artillery);
 		break;
 	}
 	case 'C':
 	{
-		generator->generateProjectile(generator->FireBall);
+		pSystem->generateProjectile(pSystem->FireBall);
 		break;
 	}
 	case 'V':
 	{
-		generator->generateProjectile(generator->Laser);
+		pSystem->generateProjectile(pSystem->Laser);
 		break;
 	}
 	case ' ':

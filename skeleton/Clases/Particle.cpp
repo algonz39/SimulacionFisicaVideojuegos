@@ -8,6 +8,9 @@ Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc, float mass, Vector4 co
 	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(radius)), &pos, color);
 }
 
+Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc, ParticleData Data, double Damp) :
+	Particle(Pos, Vel, Acc, Data.mass, Data.color, Data.radius, Data.lifeTime, Damp) {}
+
 Particle::~Particle()
 {
 	DeregisterRenderItem(renderItem);

@@ -1,3 +1,4 @@
+#pragma once
 #include "../core.hpp"
 #include "../RenderUtils.hpp"
 #include "Particle.h"
@@ -5,8 +6,7 @@
 
 class ParticleGenerator;
 
-class ParticleSystem
-{
+class ParticleSystem {
 public:
 	enum ProjectileType {
 		Pistol,
