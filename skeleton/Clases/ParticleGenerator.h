@@ -29,6 +29,4 @@ protected:
 	std::normal_distribution<float> norm{ 0.0, 1.0 };
 
 	std::vector<Particle*> particles;
-
-	Vector3 getRandomVector();
 };

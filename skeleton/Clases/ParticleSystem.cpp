@@ -1,11 +1,13 @@
 #include "ParticleSystem.h"
 #include "ParticleGenerator.h"
+#include "Firework.h"
 #include <cmath>
 
 ParticleSystem::ParticleSystem() {
 	nParticles = 0;
 	nGenerators = 0;
 	cam = GetCamera();
+	rand = new Random();
 }
 
 ParticleSystem::~ParticleSystem() {
@@ -14,27 +16,31 @@ ParticleSystem::~ParticleSystem() {
 	}
 	particles.clear();
 	nParticles = 0;
+	delete rand;
 }
 
 void ParticleSystem::generateProjectile(ProjectileType type) {
 	if (maxParticles()) return;
 	Vector3 pos = cam->getEye();
 	Vector3 vel = cam->getDir();
-	Vector3 grav = { 0, -1, 0 };
+	Vector3 grav = getGravity();
 	Particle* projectile;
 	switch (type)
 	{
 	case Pistol:
-		projectile = new Particle(pos, vel * 20.0, grav, 2, {0.5, 0.5, 0.5, 1});
+		projectile = new Particle(pos, vel * 20.0, grav / 10, 2, {0.5, 0.5, 0.5, 1});
 		break;
 	case Artillery:
-		projectile = new Particle(pos, vel * 20.0, grav * 20, 200, { 0.5, 0.5, 0.5, 1 }, 3);
+		projectile = new Particle(pos, vel * 20.0, grav * 2, 200, { 0.5, 0.5, 0.5, 1 }, 3);
 		break;
 	case FireBall:
-		projectile = new Particle(pos, vel * 10.0, grav * -0.6, 1, { 1, 0, 0, 1 });
+		projectile = new Particle(pos, vel * 10.0, grav * -0.06, 1, { 1, 0, 0, 1 });
 		break;
 	case Laser:
 		projectile = new Particle(pos, vel * 40.0, grav * 0, 0.1, { 1, 1, 0, 1 });
+		break;
+	case Fireworks:
+		projectile = new Firework(pos, vel * 35.0, grav * 0.05, this);
 		break;
 	default:
 		break;
@@ -49,7 +55,7 @@ void ParticleSystem::updateParticles(double t)
 		p->integrate(t);
 
 		if (p->isDead()) {
-			delete p;
+			delete p; p = nullptr;
 			iter = particles.erase(iter);
 			nParticles--;
 		}
@@ -60,6 +66,11 @@ void ParticleSystem::updateParticles(double t)
 	for (ParticleGenerator* g : generators) {
 		g->generate(t);
 	}
+	for (Particle* p : particlesToAdd) {
+		particles.push_back(p);
+		nParticles++;
+	}
+	particlesToAdd.clear();
 }
 
 Vector3 ParticleSystem::getGravity()
@@ -69,8 +80,7 @@ Vector3 ParticleSystem::getGravity()
 
 void ParticleSystem::addParticle(Particle* p)
 {
-	particles.push_back(p);
-	nParticles++;
+	particlesToAdd.push_back(p);
 }
 
 void ParticleSystem::addGenerator(ParticleGenerator* g)
@@ -83,5 +93,9 @@ void ParticleSystem::addGenerator(ParticleGenerator* g)
 bool ParticleSystem::maxParticles()
 {
 	return nParticles >= MAX_PARTICLES;
+}
+
+Random* ParticleSystem::getRand() {
+	return rand;
 }
 
