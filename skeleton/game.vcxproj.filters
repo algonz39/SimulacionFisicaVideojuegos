@@ -10,14 +10,20 @@
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="callbacks.cpp" />
+    <ClCompile Include="Clases\ParticleGenerator.cpp">
+      <Filter>Clases\CPP</Filter>
+    </ClCompile>
     <ClCompile Include="Clases\Particle.cpp">
-      <Filter>Clases</Filter>
+      <Filter>Clases\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Clases\Firework.cpp">
+      <Filter>Clases\CPP</Filter>
     </ClCompile>
     <ClCompile Include="Clases\ParticleSystem.cpp">
-      <Filter>Clases</Filter>
+      <Filter>Clases\CPP</Filter>
     </ClCompile>
-    <ClCompile Include="Clases\ParticleGenerator.cpp">
-      <Filter>Clases</Filter>
+    <ClCompile Include="Clases\Random.cpp">
+      <Filter>Clases\CPP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -31,13 +37,19 @@
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="Clases\Particle.h">
-      <Filter>Clases</Filter>
+      <Filter>Clases\H</Filter>
     </ClInclude>
-    <ClInclude Include="Clases\ParticleSystem.h">
-      <Filter>Clases</Filter>
+    <ClInclude Include="Clases\Firework.h">
+      <Filter>Clases\H</Filter>
     </ClInclude>
     <ClInclude Include="Clases\ParticleGenerator.h">
-      <Filter>Clases</Filter>
+      <Filter>Clases\H</Filter>
+    </ClInclude>
+    <ClInclude Include="Clases\ParticleSystem.h">
+      <Filter>Clases\H</Filter>
+    </ClInclude>
+    <ClInclude Include="Clases\Random.h">
+      <Filter>Clases\H</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +58,12 @@
     </Filter>
     <Filter Include="Clases">
       <UniqueIdentifier>{08bbfa97-a2a1-4008-ba56-1e227f02c916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clases\H">
+      <UniqueIdentifier>{2aa14ae8-5cbd-47d8-812b-044b7bbf9b9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clases\CPP">
+      <UniqueIdentifier>{7e488448-aa9d-49d9-b17e-25a60249e482}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

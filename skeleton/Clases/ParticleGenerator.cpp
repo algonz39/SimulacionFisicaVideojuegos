@@ -15,17 +15,13 @@ ParticleGenerator::~ParticleGenerator()
 
 void ParticleGenerator::generate(double t)
 {
-	if ((double)rand()/RAND_MAX < genProb) {
-		Particle* p = new Particle(pos + getRandomVector() * radius, getRandomVector() * velocity, sys->getGravity(), data);
-		if (sys->addParticle(p))
+	if (sys->getRand()->generate(1) < genProb) {
+		data.color = color[sys->getRand()->generate(3)];
+		Particle* p = new Particle(pos + sys->getRand()->getRandomVector(gausian) * radius, sys->getRand()->getRandomVector(gausian) * velocity, sys->getGravity(), data);
+		if (!sys->maxParticles()) {
+			sys->addParticle(p);
 			particles.push_back(p);
+		}
 		else delete p;
 	}
-}
-
-Vector3 ParticleGenerator::getRandomVector()
-{
-	return gausian ? Vector3(norm(rd), norm(rd), norm(rd)).getNormalized() :
-		Vector3(uni(rd), uni(rd), uni(rd)).getNormalized();
-}
- 
+} 

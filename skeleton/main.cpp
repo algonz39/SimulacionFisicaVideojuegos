@@ -57,8 +57,8 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 	pSystem = new ParticleSystem();
-	new ParticleGenerator({ 0,0,0 }, pSystem, true);
-	new ParticleGenerator({ 0,50,0 }, pSystem);
+	//new ParticleGenerator({ 0,0,0 }, pSystem, true);
+	//new ParticleGenerator({ 0,50,0 }, pSystem);
 
 }
 
@@ -123,6 +123,21 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'V':
 	{
 		pSystem->generateProjectile(pSystem->Laser);
+		break;
+	}
+	case 'B':
+	{
+		pSystem->generateProjectile(pSystem->FireworkR);
+		break;
+	}
+	case 'N':
+	{
+		pSystem->generateProjectile(pSystem->FireworkC);
+		break;
+	}
+	case 'M':
+	{
+		pSystem->generateProjectile(pSystem->FireworkS);
 		break;
 	}
 	case ' ':
