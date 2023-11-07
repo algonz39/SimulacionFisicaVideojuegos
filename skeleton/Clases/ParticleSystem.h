@@ -15,6 +15,9 @@ public:
 		FireBall,
 		Laser,
 		Fireworks,
+		FireworkR,
+		FireworkC,
+		FireworkS,
 		LastEnum
 	};
 	ParticleSystem();
@@ -32,7 +35,7 @@ private:
 	std::vector<Particle*> particlesToAdd;
 	std::vector<ParticleGenerator*> generators;
 
-	const int MAX_PARTICLES = 100;
+	const int MAX_PARTICLES = 1000;
 
 	int nParticles, nGenerators;
 	Camera* cam;

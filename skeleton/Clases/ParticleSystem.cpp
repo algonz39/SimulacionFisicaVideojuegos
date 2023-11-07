@@ -39,8 +39,14 @@ void ParticleSystem::generateProjectile(ProjectileType type) {
 	case Laser:
 		projectile = new Particle(pos, vel * 40.0, grav * 0, 0.1, { 1, 1, 0, 1 });
 		break;
-	case Fireworks:
-		projectile = new Firework(pos, vel * 35.0, grav * 0.05, this);
+	case FireworkR:
+		projectile = new Firework(pos, vel * 35.0, grav * 0.05, this, Firework::Fireworks);
+		break;
+	case FireworkC:
+		projectile = new Firework(pos, vel * 35.0, grav * 0.05, this, Firework::Circles);
+		break;
+	case FireworkS:
+		projectile = new Firework(pos, vel * 35.0, grav * 0.05, this, Firework::Swirl);
 		break;
 	default:
 		break;

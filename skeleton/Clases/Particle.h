@@ -9,6 +9,8 @@ struct ParticleData {
 	float lifeTime = 3.0;
 };
 
+const std::vector<Vector4> color = { {1,0,0,1},{0,1,0,1},{0,0,1,1} };
+
 class Particle 
 {
 public:

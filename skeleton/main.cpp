@@ -127,7 +127,17 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	}
 	case 'B':
 	{
-		pSystem->generateProjectile(pSystem->Fireworks);
+		pSystem->generateProjectile(pSystem->FireworkR);
+		break;
+	}
+	case 'N':
+	{
+		pSystem->generateProjectile(pSystem->FireworkC);
+		break;
+	}
+	case 'M':
+	{
+		pSystem->generateProjectile(pSystem->FireworkS);
 		break;
 	}
 	case ' ':
