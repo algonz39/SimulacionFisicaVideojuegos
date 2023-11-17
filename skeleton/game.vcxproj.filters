@@ -28,6 +28,16 @@
     <ClCompile Include="Clases\GravityGenerator.cpp">
       <Filter>Clases\CPP</Filter>
     </ClCompile>
+    <ClCompile Include="Clases\DragGenerator.cpp">
+      <Filter>Clases\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Clases\WhirlwindGenerator.cpp">
+      <Filter>Clases\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Clases\ExplosionGenerator.cpp">
+      <Filter>Clases\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Clases\ForceGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -58,6 +68,15 @@
       <Filter>Clases\H</Filter>
     </ClInclude>
     <ClInclude Include="Clases\GravityGenerator.h">
+      <Filter>Clases\H</Filter>
+    </ClInclude>
+    <ClInclude Include="Clases\DragGenerator.h">
+      <Filter>Clases\H</Filter>
+    </ClInclude>
+    <ClInclude Include="Clases\WhirlwindGenerator.h">
+      <Filter>Clases\H</Filter>
+    </ClInclude>
+    <ClInclude Include="Clases\ExplosionGenerator.h">
       <Filter>Clases\H</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,14 +1,16 @@
 #pragma once
 #include "ForceGenerator.h"
 
-class GravityGenerator : public ForceGenerator 
+class DragGenerator : public ForceGenerator 
 {
 public:
-	GravityGenerator(Vector3 Pos,  float Mass);
-	~GravityGenerator();
+	DragGenerator(double lTime, Vector3 Pos, Vector3 Area, Vector3 Vel, float k1, float k2 = 0);
+	~DragGenerator();
 	void updateForce(Particle* particle) override;
-private:
-	const float G = 0.00000006673;
+protected:
+	float k1;
+	float k2;
 	Vector3 pos;
-	float mass;
+	Vector3 area;
+	Vector3 vel;
 };

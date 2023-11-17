@@ -56,9 +56,18 @@ void ParticleSystem::generateProjectile(ProjectileType type) {
 
 void ParticleSystem::update(double t)
 {
-	for (ForceGenerator* f : forces) {
-		for (Particle* p : particles) {
-			f->updateForce(p);
+	for (auto iter = forces.begin(); iter != forces.end();) {
+		ForceGenerator* f = *iter;
+		if (f->updateLifeTime(t)) {
+			delete f; f = nullptr;
+			iter = forces.erase(iter);
+			nForces--;
+		}
+		else {
+			for (Particle* p : particles) {
+				f->updateForce(p);
+			}
+			iter++;
 		}
 	}
 	for (auto iter = particles.begin(); iter != particles.end();) {

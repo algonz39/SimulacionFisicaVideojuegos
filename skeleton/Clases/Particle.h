@@ -21,6 +21,7 @@ public:
 	void integrate(double t);
 	inline float getMass() { return mass; }
 	inline Vector3 getPos() { return pos.p; }
+	inline Vector3 getVel() { return vel; }
 	void addForce(Vector3 force);
 	void clearForces();
 	bool isDead();

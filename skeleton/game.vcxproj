@@ -254,12 +254,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="callbacks.cpp" />
+    <ClCompile Include="Clases\DragGenerator.cpp" />
+    <ClCompile Include="Clases\ExplosionGenerator.cpp" />
     <ClCompile Include="Clases\Firework.cpp" />
+    <ClCompile Include="Clases\ForceGenerator.cpp" />
     <ClCompile Include="Clases\GravityGenerator.cpp" />
     <ClCompile Include="Clases\Particle.cpp" />
     <ClCompile Include="Clases\ParticleGenerator.cpp" />
     <ClCompile Include="Clases\ParticleSystem.cpp" />
     <ClCompile Include="Clases\Random.cpp" />
+    <ClCompile Include="Clases\WhirlwindGenerator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
@@ -267,6 +271,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="callbacks.hpp" />
+    <ClInclude Include="Clases\DragGenerator.h" />
+    <ClInclude Include="Clases\ExplosionGenerator.h" />
     <ClInclude Include="Clases\Firework.h" />
     <ClInclude Include="Clases\ForceGenerator.h" />
     <ClInclude Include="Clases\GravityGenerator.h" />
@@ -274,6 +280,7 @@
     <ClInclude Include="Clases\ParticleGenerator.h" />
     <ClInclude Include="Clases\ParticleSystem.h" />
     <ClInclude Include="Clases\Random.h" />
+    <ClInclude Include="Clases\WhirlwindGenerator.h" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />

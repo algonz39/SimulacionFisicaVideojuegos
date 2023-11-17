@@ -1,16 +1,22 @@
-#include "GravityGenerator.h"
+#include "DragGenerator.h"
 
-GravityGenerator::GravityGenerator(Vector3 Pos, float Mass) : pos(Pos), mass(Mass)
+DragGenerator::DragGenerator(double lTime, Vector3 Pos, Vector3 Area, Vector3 Vel, float K1, float K2)
+	: ForceGenerator(lTime), pos(Pos), area(Area), vel(Vel), k1(K1), k2(K2)
 {
 }
 
-GravityGenerator::~GravityGenerator()
+DragGenerator::~DragGenerator()
 {
 }
 
-void GravityGenerator::updateForce(Particle* particle)
+void DragGenerator::updateForce(Particle* particle)
 {
-	Vector3 force = (pos - particle->getPos()) * mass * particle->getMass() * G / pow((pos - particle->getPos()).magnitude(),2);
-	
-	particle->addForce(force);
+	Vector3 pPos = particle->getPos();
+	if (pPos.y < (pos + area / 2).y && pPos.y >(pos - area / 2).y
+		&& pPos.x < (pos + area / 2).x && pPos.x >(pos - area / 2).x)
+	{
+		Vector3 force = (vel - particle->getVel());
+		Vector3 force = k1 * force + k2 * force * force;
+		particle->addForce(force);
+	}
 }

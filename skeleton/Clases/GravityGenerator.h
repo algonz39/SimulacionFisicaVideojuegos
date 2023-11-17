@@ -4,7 +4,7 @@
 class GravityGenerator : public ForceGenerator 
 {
 public:
-	GravityGenerator(Vector3 Pos,  float Mass);
+	GravityGenerator(Vector3 Pos,  float Mass, double lTime);
 	~GravityGenerator();
 	void updateForce(Particle* particle) override;
 private:

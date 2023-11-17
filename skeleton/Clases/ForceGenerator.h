@@ -8,7 +8,11 @@
 class ForceGenerator
 {
 public:
-	ForceGenerator();
+	ForceGenerator(double lTime);
 	virtual ~ForceGenerator();
 	virtual void updateForce(Particle* particle);
+	bool updateLifeTime(double t);
+protected:
+	double lifeTime;
+	double time;
 };
