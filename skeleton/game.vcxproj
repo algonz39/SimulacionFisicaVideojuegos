@@ -255,6 +255,7 @@
   <ItemGroup>
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="Clases\Firework.cpp" />
+    <ClCompile Include="Clases\GravityGenerator.cpp" />
     <ClCompile Include="Clases\Particle.cpp" />
     <ClCompile Include="Clases\ParticleGenerator.cpp" />
     <ClCompile Include="Clases\ParticleSystem.cpp" />
@@ -267,6 +268,8 @@
   <ItemGroup>
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="Clases\Firework.h" />
+    <ClInclude Include="Clases\ForceGenerator.h" />
+    <ClInclude Include="Clases\GravityGenerator.h" />
     <ClInclude Include="Clases\Particle.h" />
     <ClInclude Include="Clases\ParticleGenerator.h" />
     <ClInclude Include="Clases\ParticleSystem.h" />
