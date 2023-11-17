@@ -14,7 +14,7 @@ void WhirlwindGenerator::updateForce(Particle* particle)
 		vel = pPos - pos;
 		vel = Vector3(-vel.z, -vel.y, vel.x) * velM;
 		Vector3 force = (vel - particle->getVel());
-		Vector3 force = k1 * force + k2 * force * force.magnitude();
+		force = k1 * force + k2 * force * force.magnitude();
 		particle->addForce(force);
 	}
 }

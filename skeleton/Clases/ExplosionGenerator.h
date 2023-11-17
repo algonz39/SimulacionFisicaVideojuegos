@@ -4,7 +4,7 @@
 class ExplosionGenerator : public ForceGenerator 
 {
 public:
-	ExplosionGenerator(Vector3 Pos);
+	ExplosionGenerator(double lTime, Vector3 Pos);
 	~ExplosionGenerator();
 	void updateForce(Particle* particle) override;
 protected:

@@ -1,5 +1,5 @@
 #include "ExplosionGenerator.h"
 
-ExplosionGenerator::ExplosionGenerator(Vector3 Pos) : pos(Pos)
+ExplosionGenerator::ExplosionGenerator(double lTime, Vector3 Pos) : ForceGenerator(lTime), pos(Pos)
 {
 }

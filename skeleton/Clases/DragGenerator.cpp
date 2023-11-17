@@ -16,7 +16,7 @@ void DragGenerator::updateForce(Particle* particle)
 		&& pPos.x < (pos + area / 2).x && pPos.x >(pos - area / 2).x)
 	{
 		Vector3 force = (vel - particle->getVel());
-		Vector3 force = k1 * force + k2 * force * force;
+		force = k1 * force + k2 * force * force.magnitude();
 		particle->addForce(force);
 	}
 }
