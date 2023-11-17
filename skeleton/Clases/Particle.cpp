@@ -19,9 +19,20 @@ Particle::~Particle()
 void Particle::integrate(double t)
 {
 	pos.p += vel * t;
-	vel += acc * t;
+	vel += (acc + forces / mass) * t;
 	vel *= powf(damp, t);
 	lifeTime -= t;
+	clearForces();
+}
+
+void Particle::addForce(Vector3 force)
+{
+	forces += force;
+}
+
+void Particle::clearForces()
+{
+	forces = { 0,0,0 };
 }
 
 bool Particle::isDead()

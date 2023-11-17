@@ -54,8 +54,13 @@ void ParticleSystem::generateProjectile(ProjectileType type) {
 	addParticle(projectile);
 }
 
-void ParticleSystem::updateParticles(double t)
+void ParticleSystem::update(double t)
 {
+	for (ForceGenerator* f : forces) {
+		for (Particle* p : particles) {
+			f->updateForce(p);
+		}
+	}
 	for (auto iter = particles.begin(); iter != particles.end();) {
 		Particle* p = *iter;
 		p->integrate(t);
@@ -94,6 +99,12 @@ void ParticleSystem::addGenerator(ParticleGenerator* g)
 	generators.push_back(g);
 	nGenerators++;
 
+}
+
+void ParticleSystem::addForce(ForceGenerator* f)
+{
+	forces.push_back(f);
+	nForces++;
 }
 
 bool ParticleSystem::maxParticles()

@@ -57,8 +57,8 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 	pSystem = new ParticleSystem();
-	//new ParticleGenerator({ 0,0,0 }, pSystem, true);
-	//new ParticleGenerator({ 0,50,0 }, pSystem);
+	//new ParticleGenerator({ 0,0,0 }, pSystem, true);	
+	//new ParticleGenerator({ 0,50,0 }, pSystem, false);
 
 }
 
@@ -72,7 +72,7 @@ void stepPhysics(bool interactive, double t)
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
-	pSystem->updateParticles(t);
+	pSystem->update(t);
 }
 
 // Function to clean data
