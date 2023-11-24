@@ -41,6 +41,9 @@
     <ClCompile Include="Clases\GGenerator.cpp">
       <Filter>Clases\CPP</Filter>
     </ClCompile>
+    <ClCompile Include="Clases\SpringGenerator.cpp">
+      <Filter>Clases\CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -83,6 +86,9 @@
       <Filter>Clases\H</Filter>
     </ClInclude>
     <ClInclude Include="Clases\GGenerator.h">
+      <Filter>Clases\H</Filter>
+    </ClInclude>
+    <ClInclude Include="Clases\SpringGenerator.h">
       <Filter>Clases\H</Filter>
     </ClInclude>
   </ItemGroup>

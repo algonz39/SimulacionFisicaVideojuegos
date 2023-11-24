@@ -62,23 +62,28 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 	pSystem = new ParticleSystem();
-	pSystem->addForce(new GGenerator(-1, Vector3(0, -10, 0)));
+	pSystem->addForce(new GGenerator(-1, Vector3(0, -1, 0)));
+
+	//new ParticleGenerator({ 0,40,0 }, pSystem);
+
+	//pSystem->addParticle(new Particle(Vector3(0, 40, 0), Vector3(5, 0, 0), Vector3(0, 0, 0), 1, {1,1,0,1},1,10)); //Amarillo
+	//pSystem->addParticle(new Particle(Vector3(0, 40, 0), Vector3(-5, 0, 0), Vector3(0, 0, 0), 5, { 1,0,1,1 }, 1, 10)); //Magenta
+	//pSystem->addParticle(new Particle(Vector3(0, 40, 0), Vector3(0, 0, 5), Vector3(0, 0, 0), 10, { 0,1,1,1 }, 1, 10)); //Cian
+	
+	pSystem->addParticle(new Particle(Vector3(20, 40, 20), Vector3(0, 0, 0), Vector3(0, 0, 0), 1, { 1,1,0,1 }, 1, 10)); //Amarillo
+	pSystem->addParticle(new Particle(Vector3(30, 40, 30), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 1,0,1,1 }, 1, 10)); //Magenta
+	pSystem->addParticle(new Particle(Vector3(20, 40, 30), Vector3(0, 0, 0), Vector3(0, 0, 0), 10, { 0,1,1,1 }, 1, 10)); //Cian
+
+
 	//pSystem->addForce(new GGenerator(-1, Vector3(-5, 0, 0)));
 
 
-	//pSystem->addForce(new GravityGenerator(Vector3(40, 40, 40), 5000000000, 10));
+	//pSystem->addForce(new GravityGenerator(Vector3(0, 60, 0), 5000000000, 10));
 	
-	//pSystem->addForce(new DragGenerator(5,Vector3(50,50,50),Vector3(10,10,10), Vector3(20,0,0), 1));
+	//pSystem->addForce(new DragGenerator(10,Vector3(0,40,0),Vector3(25,25,25), Vector3(30,0,0), 1));
 
 	
-	/*pSystem->addForce(new WhirlwindGenerator(10, Vector3(0, 40, 0), Vector3(100, 100, 100), 5, 1));
-	pSystem->addParticle(new Particle(Vector3(0, 40, 0), Vector3(5, 0, 0), Vector3(0, 0, 0), 1, {1,1,0,1},1,10));
-	pSystem->addParticle(new Particle(Vector3(1, 40, 0), Vector3(-5, 0, 0), Vector3(0, 0, 0), 1, { 1,0,1,1 }, 1, 10));
-	pSystem->addParticle(new Particle(Vector3(0, 40, 1), Vector3(0, 0, 5), Vector3(0, 0, 0), 1, { 0,1,1,1 }, 1, 10));*/
-
-	//pSystem->addParticle(new Particle(Vector3(20, 40, 20), Vector3(0, 0, 0), Vector3(0, 0, 0), 1, { 1,1,0,1 }, 1, 10)); //Amarillo
-	//pSystem->addParticle(new Particle(Vector3(30, 40, 30), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 1,0,1,1 }, 1, 10)); //Magenta
-	//pSystem->addParticle(new Particle(Vector3(20, 40, 30), Vector3(0, 0, 0), Vector3(0, 0, 0), 10, { 0,1,1,1 }, 1, 10)); //Cian
+	//pSystem->addForce(new WhirlwindGenerator(10, Vector3(0, 40, 0), Vector3(100, 100, 100), 5, 1));
 
 
 }
@@ -163,7 +168,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	}	
 	case 'K':
 	{
-		pSystem->addForce(new ExplosionGenerator(2, Vector3(25, 40, 25), 30, 1000, 1));
+		pSystem->addForce(new ExplosionGenerator(2, Vector3(25, 40, 25), 30, 2000, 1));
 		break;
 	}
 	case ' ':

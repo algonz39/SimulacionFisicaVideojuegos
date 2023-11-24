@@ -264,6 +264,7 @@
     <ClCompile Include="Clases\ParticleGenerator.cpp" />
     <ClCompile Include="Clases\ParticleSystem.cpp" />
     <ClCompile Include="Clases\Random.cpp" />
+    <ClCompile Include="Clases\SpringGenerator.cpp" />
     <ClCompile Include="Clases\WhirlwindGenerator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
@@ -282,6 +283,7 @@
     <ClInclude Include="Clases\ParticleGenerator.h" />
     <ClInclude Include="Clases\ParticleSystem.h" />
     <ClInclude Include="Clases\Random.h" />
+    <ClInclude Include="Clases\SpringGenerator.h" />
     <ClInclude Include="Clases\WhirlwindGenerator.h" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="RenderUtils.hpp" />
