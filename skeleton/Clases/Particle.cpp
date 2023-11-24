@@ -2,7 +2,7 @@
 #include <cmath>
 
 Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc, float mass, Vector4 color, float radius, float lifeTime, double Damp) 
-	: damp(Damp), vel(Vel) , acc (Acc), lifeTime(lifeTime)
+	: damp(Damp), vel(Vel) , acc (Acc), lifeTime(lifeTime), mass(mass), forces(Vector3(0,0,0))
 {
 	pos = physx::PxTransform(Pos.x, Pos.y, Pos.z);
 	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(radius)), &pos, color);

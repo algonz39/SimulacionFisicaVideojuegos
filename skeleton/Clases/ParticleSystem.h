@@ -2,11 +2,12 @@
 #include "../core.hpp"
 #include "../RenderUtils.hpp"
 #include "Particle.h"
-#include "ForceGenerator.h"
 #include "Random.h"
 #include <vector>
 
 class ParticleGenerator;
+class ForceGenerator;
+
 
 class ParticleSystem {
 public:

@@ -4,10 +4,11 @@
 class ExplosionGenerator : public ForceGenerator 
 {
 public:
-	ExplosionGenerator(double lTime, Vector3 Pos);
-	~ExplosionGenerator();
+	ExplosionGenerator(double lTime, Vector3 Pos, float velocity, float K, float t);
 	void updateForce(Particle* particle) override;
 protected:
 	Vector3 pos;
-	Vector3 area;
+	float velocity;
+	float K;
+	float t;
 };

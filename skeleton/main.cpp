@@ -10,6 +10,10 @@
 #include "Clases/ParticleGenerator.h"
 #include "Clases/ParticleSystem.h"
 #include <iostream>
+#include "Clases/GravityGenerator.h"
+#include "Clases/DragGenerator.h"
+#include "Clases/WhirlwindGenerator.h"
+#include "Clases/ExplosionGenerator.h"
 
 std::string display_text = "This is a test";
 
@@ -57,8 +61,21 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 	pSystem = new ParticleSystem();
-	//new ParticleGenerator({ 0,0,0 }, pSystem, true);	
-	//new ParticleGenerator({ 0,50,0 }, pSystem, false);
+
+	//pSystem->addForce(new GravityGenerator(Vector3(40, 40, 40), 5000000000, 10));
+	
+	//pSystem->addForce(new DragGenerator(5,Vector3(50,50,50),Vector3(10,10,10), Vector3(20,0,0), 1));
+
+	
+	/*pSystem->addForce(new WhirlwindGenerator(10, Vector3(0, 40, 0), Vector3(100, 100, 100), 5, 1));
+	pSystem->addParticle(new Particle(Vector3(0, 40, 0), Vector3(5, 0, 0), Vector3(0, 0, 0), 1, {1,1,0,1},1,10));
+	pSystem->addParticle(new Particle(Vector3(1, 40, 0), Vector3(-5, 0, 0), Vector3(0, 0, 0), 1, { 1,0,1,1 }, 1, 10));
+	pSystem->addParticle(new Particle(Vector3(0, 40, 1), Vector3(0, 0, 5), Vector3(0, 0, 0), 1, { 0,1,1,1 }, 1, 10));*/
+
+	//pSystem->addParticle(new Particle(Vector3(20, 40, 20), Vector3(0, 0, 0), Vector3(0, 0, 0), 1, { 1,1,0,1 }, 1, 10)); //Amarillo
+	//pSystem->addParticle(new Particle(Vector3(30, 40, 30), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 1,0,1,1 }, 1, 10)); //Magenta
+	//pSystem->addParticle(new Particle(Vector3(20, 40, 30), Vector3(0, 0, 0), Vector3(0, 0, 0), 10, { 0,1,1,1 }, 1, 10)); //Cian
+
 
 }
 
@@ -138,6 +155,11 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'M':
 	{
 		pSystem->generateProjectile(pSystem->FireworkS);
+		break;
+	}	
+	case 'K':
+	{
+		pSystem->addForce(new ExplosionGenerator(2, Vector3(25, 40, 25), 30, 1000, 1));
 		break;
 	}
 	case ' ':

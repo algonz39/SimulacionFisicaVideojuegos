@@ -1,5 +1,6 @@
 #include "ParticleSystem.h"
 #include "ParticleGenerator.h"
+#include "ForceGenerator.h"
 #include "Firework.h"
 #include <cmath>
 

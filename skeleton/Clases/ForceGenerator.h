@@ -1,16 +1,12 @@
 #pragma once
-#include "../core.hpp"
-#include "../RenderUtils.hpp"
-#include "ParticleSystem.h"
+#include "Particle.h"
 #include <vector>
-#include <random>
 
-class ForceGenerator
-{
+class ForceGenerator {
 public:
 	ForceGenerator(double lTime = 5);
 	virtual ~ForceGenerator();
-	virtual void updateForce(Particle* particle);
+	virtual void updateForce(Particle* particle) {}
 	bool updateLifeTime(double t);
 
 protected:
