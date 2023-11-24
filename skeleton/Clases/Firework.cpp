@@ -15,7 +15,7 @@ void Firework::onDeath()
 	switch (fire) {
 	case Random:
 		for (int i = 0; i < nParticles; ++i) {
-			Particle* p = new Particle(pos.p, sys->getRand()->getRandomVector(true) * 15, sys->getGravity(), 1, color[sys->getRand()->generate(3)]);
+			Particle* p = new Particle(pos.p, sys->getRand()->getRandomVector(true) * 15, { 0,0,0 }, 1, color[sys->getRand()->generate(3)]);
 			if (!sys->maxParticles()) {
 				sys->addParticle(p);
 			}
@@ -27,7 +27,7 @@ void Firework::onDeath()
 		break;
 	case Fireworks:
 		for (int i = 0; i < nParticles / 7; ++i) {
-			Particle* p = new Firework(pos.p, sys->getRand()->getRandomVector(false) * 10, sys->getGravity() * 0, sys, Random);
+			Particle* p = new Firework(pos.p, sys->getRand()->getRandomVector(false) * 10, { 0,0,0 }, sys, Random);
 			if (!sys->maxParticles()) {
 				sys->addParticle(p);
 			}
@@ -40,7 +40,7 @@ void Firework::onDeath()
 	case Swirl:
 		for (int i = 0; i < nParticles; ++i) {
 			Vector3 mov = Vector3(cos(2 * nParticles + i * 360 / 4), 0, sin(2 * nParticles + i * 360 / 4));
-			Particle* p = new Particle(pos.p, mov * (50 - i), sys->getGravity() * 0.1, 1, color[sys->getRand()->generate(3)]);
+			Particle* p = new Particle(pos.p, mov * (50 - i), { 0,0,0 }, 1, color[sys->getRand()->generate(3)]);
 			if (!sys->maxParticles()) {
 				sys->addParticle(p);
 			}
@@ -55,7 +55,7 @@ void Firework::onDeath()
 		for (int j = 1; j < nCircles; ++j) {
 			for (int i = 0; i < nParticles; ++i) {
 				Vector3 mov = Vector3(sin(i * 360 / nParticles), 0, cos(i * 360 / nParticles));
-				Particle* p = new Particle(pos.p, mov * 5 * j, sys->getGravity() * 0.1, 1, color[sys->getRand()->generate(3)]);
+				Particle* p = new Particle(pos.p, mov * 5 * j, { 0,0,0 }, 1, color[sys->getRand()->generate(3)]);
 				if (!sys->maxParticles()) {
 					sys->addParticle(p);
 				}

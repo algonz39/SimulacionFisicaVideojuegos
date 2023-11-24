@@ -24,7 +24,7 @@ void ParticleSystem::generateProjectile(ProjectileType type) {
 	if (maxParticles()) return;
 	Vector3 pos = cam->getEye();
 	Vector3 vel = cam->getDir();
-	Vector3 grav = getGravity();
+	Vector3 grav = {0,0,0};
 	Particle* projectile;
 	switch (type)
 	{
@@ -92,11 +92,6 @@ void ParticleSystem::update(double t)
 		nParticles++;
 	}
 	particlesToAdd.clear();
-}
-
-Vector3 ParticleSystem::getGravity()
-{
-	return Vector3(0,-10,0);
 }
 
 void ParticleSystem::addParticle(Particle* p)

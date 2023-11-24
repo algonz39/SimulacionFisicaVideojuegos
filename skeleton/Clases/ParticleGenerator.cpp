@@ -16,7 +16,7 @@ ParticleGenerator::~ParticleGenerator()
 void ParticleGenerator::generate(double t)
 {
 	if (sys->getRand()->generate(1) < genProb) {
-		Particle* p = new Particle(pos + sys->getRand()->getRandomVector(gausian) * radius, sys->getRand()->getRandomVector(gausian) * velocity, sys->getGravity(), data);
+		Particle* p = new Particle(pos + sys->getRand()->getRandomVector(gausian) * radius, sys->getRand()->getRandomVector(gausian) * velocity, {0,0,0}, data);
 		if (!sys->maxParticles()) {
 			sys->addParticle(p);
 			particles.push_back(p);

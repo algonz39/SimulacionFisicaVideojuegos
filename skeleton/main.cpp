@@ -11,6 +11,7 @@
 #include "Clases/ParticleSystem.h"
 #include <iostream>
 #include "Clases/GravityGenerator.h"
+#include "Clases/GGenerator.h"
 #include "Clases/DragGenerator.h"
 #include "Clases/WhirlwindGenerator.h"
 #include "Clases/ExplosionGenerator.h"
@@ -61,6 +62,9 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 	pSystem = new ParticleSystem();
+	pSystem->addForce(new GGenerator(-1, Vector3(0, -10, 0)));
+	//pSystem->addForce(new GGenerator(-1, Vector3(-5, 0, 0)));
+
 
 	//pSystem->addForce(new GravityGenerator(Vector3(40, 40, 40), 5000000000, 10));
 	

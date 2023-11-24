@@ -258,6 +258,7 @@
     <ClCompile Include="Clases\ExplosionGenerator.cpp" />
     <ClCompile Include="Clases\Firework.cpp" />
     <ClCompile Include="Clases\ForceGenerator.cpp" />
+    <ClCompile Include="Clases\GGenerator.cpp" />
     <ClCompile Include="Clases\GravityGenerator.cpp" />
     <ClCompile Include="Clases\Particle.cpp" />
     <ClCompile Include="Clases\ParticleGenerator.cpp" />
@@ -275,6 +276,7 @@
     <ClInclude Include="Clases\ExplosionGenerator.h" />
     <ClInclude Include="Clases\Firework.h" />
     <ClInclude Include="Clases\ForceGenerator.h" />
+    <ClInclude Include="Clases\GGenerator.h" />
     <ClInclude Include="Clases\GravityGenerator.h" />
     <ClInclude Include="Clases\Particle.h" />
     <ClInclude Include="Clases\ParticleGenerator.h" />
