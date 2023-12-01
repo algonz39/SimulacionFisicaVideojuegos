@@ -6,6 +6,7 @@ ExplosionGenerator::ExplosionGenerator(double lTime, Vector3 Pos, float velocity
 
 void ExplosionGenerator::updateForce(Particle* particle)
 {
+	if (excluded.count(particle)) return;
 	if ((particle->getPos() - pos).magnitude() >= time * velocity) {
 		Vector3 force = (particle->getPos() - pos) * K / pow((particle->getPos() - pos).magnitude(), 2) * exp(-time / t);
 

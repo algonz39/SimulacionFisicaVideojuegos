@@ -7,6 +7,7 @@ WhirlwindGenerator::WhirlwindGenerator(double lTime, Vector3 Pos, Vector3 Area, 
 
 void WhirlwindGenerator::updateForce(Particle* particle)
 {
+	if (excluded.count(particle)) return;
 	Vector3 pPos = particle->getPos();
 	if (pPos.y < (pos + area / 2).y && pPos.y >(pos - area / 2).y
 		&& pPos.x < (pos + area / 2).x && pPos.x >(pos - area / 2).x)

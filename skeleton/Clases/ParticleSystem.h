@@ -28,9 +28,9 @@ public:
 	void generateProjectile(ProjectileType type);
 	void update(double t);
 	Vector3 getGravity();
-	void addParticle(Particle* p);
-	void addGenerator(ParticleGenerator* p);
-	void addForce(ForceGenerator* f);
+	Particle* addParticle(Particle* p);
+	ParticleGenerator* addGenerator(ParticleGenerator* p);
+	ForceGenerator* addForce(ForceGenerator* f);
 	bool maxParticles();
 	Random* getRand();
 

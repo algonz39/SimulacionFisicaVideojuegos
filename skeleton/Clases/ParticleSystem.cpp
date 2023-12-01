@@ -94,22 +94,25 @@ void ParticleSystem::update(double t)
 	particlesToAdd.clear();
 }
 
-void ParticleSystem::addParticle(Particle* p)
+Particle* ParticleSystem::addParticle(Particle* p)
 {
 	particlesToAdd.push_back(p);
+	return p;
 }
 
-void ParticleSystem::addGenerator(ParticleGenerator* g)
+ParticleGenerator* ParticleSystem::addGenerator(ParticleGenerator* g)
 {
 	generators.push_back(g);
 	nGenerators++;
+	return g;
 
 }
 
-void ParticleSystem::addForce(ForceGenerator* f)
+ForceGenerator* ParticleSystem::addForce(ForceGenerator* f)
 {
 	forces.push_back(f);
 	nForces++;
+	return f;
 }
 
 bool ParticleSystem::maxParticles()

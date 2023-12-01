@@ -11,6 +11,6 @@ GGenerator::~GGenerator()
 
 void GGenerator::updateForce(Particle* particle)
 {
-	
+	if (excluded.count(particle)) return;
 	particle->addForce(gravity * particle->getMass());
 }

@@ -254,6 +254,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="callbacks.cpp" />
+    <ClCompile Include="Clases\BouyancyForceGenerator.cpp" />
     <ClCompile Include="Clases\DragGenerator.cpp" />
     <ClCompile Include="Clases\ExplosionGenerator.cpp" />
     <ClCompile Include="Clases\Firework.cpp" />
@@ -273,6 +274,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="callbacks.hpp" />
+    <ClInclude Include="Clases\BouyancyForceGenerator.h" />
     <ClInclude Include="Clases\DragGenerator.h" />
     <ClInclude Include="Clases\ExplosionGenerator.h" />
     <ClInclude Include="Clases\Firework.h" />
