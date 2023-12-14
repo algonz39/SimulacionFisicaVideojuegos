@@ -20,7 +20,7 @@ void BouyancyForceGenerator::updateForce(Particle* particle)
 		float inmersion = 0;
 		if (h - h0 > height * 0.5) inmersion = 0;
 		if (h0 - h > height * 0.5) inmersion = 1;
-		else inmersion = h0 - h / height + 0.5;
+		else inmersion = (h0 - h) / height + 0.5;
 		force.y = density * volume * inmersion * gravity;
 
 		particle->addForce(force);

@@ -37,6 +37,7 @@ PxPvd*                  gPvd        = nullptr;
 PxDefaultCpuDispatcher*	gDispatcher = nullptr;
 PxScene*				gScene      = nullptr;
 ParticleSystem*			pSystem	    = nullptr;
+Particle*				red			= nullptr;
 ContactReportCallback gContactReportCallback;
 
 
@@ -66,46 +67,36 @@ void initPhysics(bool interactive)
 	pSystem = new ParticleSystem();
 	pSystem->addForce(new GGenerator(-1, Vector3(0, 0, 0)));
 
-#pragma region P3
-	//new ParticleGenerator({ 0,40,0 }, pSystem);
-
-	//pSystem->addParticle(new Particle(Vector3(0, 40, 0), Vector3(5, 0, 0), Vector3(0, 0, 0), 1, {1,1,0,1},1,10)); //Amarillo
-	//pSystem->addParticle(new Particle(Vector3(0, 40, 0), Vector3(-5, 0, 0), Vector3(0, 0, 0), 5, { 1,0,1,1 }, 1, 10)); //Magenta
-	//pSystem->addParticle(new Particle(Vector3(0, 40, 0), Vector3(0, 0, 5), Vector3(0, 0, 0), 10, { 0,1,1,1 }, 1, 10)); //Cian
-
-	pSystem->addParticle(new Particle(Vector3(20, 40, 20), Vector3(0, 0, 0), Vector3(0, 0, 0), 1, { 1,1,0,1 }, 1, 10)); //Amarillo
-	pSystem->addParticle(new Particle(Vector3(30, 40, 30), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 1,0,1,1 }, 1, 10)); //Magenta
-	pSystem->addParticle(new Particle(Vector3(20, 40, 30), Vector3(0, 0, 0), Vector3(0, 0, 0), 10, { 0,1,1,1 }, 1, 10)); //Cian
-
-
-	//pSystem->addForce(new GGenerator(-1, Vector3(-5, 0, 0)));
-
-
-	//pSystem->addForce(new GravityGenerator(Vector3(0, 60, 0), 5000000000, 10));
-
-	//pSystem->addForce(new DragGenerator(10,Vector3(0,40,0),Vector3(25,25,25), Vector3(30,0,0), 1));
-
-
-	//pSystem->addForce(new WhirlwindGenerator(10, Vector3(0, 40, 0), Vector3(100, 100, 100), 5, 1));
-
-#pragma endregion
-
 #pragma region P4
-	////Particle* am = pSystem->addParticle(new Particle(Vector3(20, 40, 20), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 1,1,0,1 }, 1, 10)); //Amarillo
-	////Particle* ma = pSystem->addParticle(new Particle(Vector3(30, 40, 30), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 1,0,1,1 }, 1, 10)); //Magenta
-	////Particle* cy = pSystem->addParticle(new Particle(Vector3(20, 40, 30), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 0,1,1,1 }, 1, 10)); //Cian
 
-	////pSystem->addForce(new SpringGenerator(-1,2,10,am, ma));
-	////pSystem->addForce(new SpringGenerator(-1,2,10,ma, cy));
+	//Muelle
+	//Particle* am = pSystem->addParticle(new Particle(Vector3(20, 40, 20), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 1,1,0,1 }, 1, 10)); //Amarillo
+	//Particle* ma = pSystem->addParticle(new Particle(Vector3(30, 40, 30), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 1,0,1,1 }, 1, 10)); //Magenta
+	//pSystem->addForce(new SpringGenerator(-1,1.5,5,am, ma));
 
-	////Particle* gr = pSystem->addParticle(new Particle(Vector3(0, 30, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 10, { 0,1,0,1 }, 1, 10)); //Green
-	////pSystem->addForce(new SpringGenerator(-1, 2, 10, gr, Vector3(0,50,0)));
+	//Muelle estatico
+	//Particle* gr = pSystem->addParticle(new Particle(Vector3(0, 30, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 10, { 0,1,0,1 }, 1, 25)); //Green
+	//Particle* top = pSystem->addParticle(new Particle(Vector3(0, 50, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 10, { 1,1,1,1 }, 1, 25)); //Gray
+	//pSystem->addForce(new GGenerator(-1, Vector3(0, -9.8, 0)))->addExcluded(top);
+	//pSystem->addForce(new SpringGenerator(-1, 2, 10, gr, Vector3(0,50,0)));
 
-	//pSystem->addForce(new GGenerator(-1, Vector3(0, -9.8, 0)));
-	//Particle* red = pSystem->addParticle(new Particle(Vector3(40, 45, 40), Vector3(0, 0, 0), Vector3(0, 0, 0), 100, { 1,0,0,1 }, 1, 10, Cube)); //Red
-	//Particle* sea = pSystem->addParticle(new Particle(Vector3(40, 40, 40), Vector3(0, 0, 0), Vector3(0, 0, 0), 0, { 0,0,1,1 }, 1, 10, Plane));
-	//pSystem->addForce(new BouyancyForceGenerator(-1, sea, 10, 10, 0.1));
+	//Slinky
+	//pSystem->addForce(new GGenerator(-1, Vector3(0, 0, 0)));
+	//Particle* am = pSystem->addParticle(new Particle(Vector3(10, 50, 10), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 1,1,0,1 }, 1, 50)); //Amarillo
+	//Particle* ma = pSystem->addParticle(new Particle(Vector3(10, 40, 10), Vector3(0, 0, 0), Vector3(0, 0, 0), 10, { 1,0,1,1 }, 1, 50)); //Magenta
+	//Particle* cy = pSystem->addParticle(new Particle(Vector3(10, 30, 10), Vector3(0, 0, 0), Vector3(0, 0, 0), 15, { 0,1,1,1 }, 1, 50)); //Cian
+	//Particle* ro = pSystem->addParticle(new Particle(Vector3(10, 20, 10), Vector3(0, 0, 0), Vector3(0, 0, 0), 10, { 1,0,0,1 }, 1, 50)); //Rojo
+	//Particle* ve = pSystem->addParticle(new Particle(Vector3(10, 10, 10), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 0,1,0,1 }, 1, 50)); //Verde
+	//pSystem->addForce(new SpringGenerator(-1, 1.5, 5, am, ma));
+	//pSystem->addForce(new SpringGenerator(-1, 1.5, 5, ma, cy));
+	//pSystem->addForce(new SpringGenerator(-1, 1.5, 5, cy, ro));
+	//pSystem->addForce(new SpringGenerator(-1, 1.5, 5, ro, ve));
 
+	//Flotacion
+	//red = pSystem->addParticle(new Particle(Vector3(-20, 40, -20), Vector3(0, 0, 0), Vector3(0, 0, 0), 7000, { 1,0,0,1 }, 10, 1000, Cube)); //Red
+	//Particle* sea = pSystem->addParticle(new Particle(Vector3(-20, 40, -20), Vector3(0, 0, 0), Vector3(0, 0, 0), 1, { 0,0,1,1 }, 30, 1000, Plane)); //Sea
+	//pSystem->addForce(new BouyancyForceGenerator(-1, sea, 10, 10, 1000));
+	//pSystem->addForce(new GGenerator(-1, Vector3(0, -9.8, 0)))->addExcluded(sea);
 
 
 #pragma endregion
@@ -194,6 +185,18 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'K':
 	{
 		pSystem->addForce(new ExplosionGenerator(2, Vector3(25, 40, 25), 30, 2000, 100));
+		break;
+	}
+	case 'G':
+	{
+		if(red) red->setMass(red->getMass() - 1000);
+		std::cout << "Masa: " << red->getMass() << " kg | Densidad: " << red->getMass()/10 << " kg/m3\n";
+		break;
+	}
+	case 'H':
+	{
+		if (red) red->setMass(red->getMass() + 1000);
+		std::cout << "Masa: " << red->getMass() << "kg | Densidad: " << red->getMass() / 10 << "kg/m3\n";
 		break;
 	}
 	case ' ':

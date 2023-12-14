@@ -13,7 +13,7 @@ Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc, float mass, Vector4 co
 		renderItem = new RenderItem(CreateShape(physx::PxBoxGeometry(radius,radius,radius)), &pos, color);
 		break;
 	case Plane:
-		renderItem = new RenderItem(CreateShape(physx::PxPlaneGeometry()), &pos, color);
+		renderItem = new RenderItem(CreateShape(physx::PxBoxGeometry(radius, 0.1, radius)), &pos, color);
 		break;
 	default:
 		break;
@@ -55,5 +55,11 @@ bool Particle::isDead()
 void Particle::kill()
 {
 	lifeTime = 0;
+}
+
+void Particle::setMass(float mass)
+{
+	if (mass <= 0) mass = 1;
+	this->mass = mass;
 }
 
