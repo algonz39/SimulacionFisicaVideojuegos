@@ -27,7 +27,7 @@ void SpringGenerator::updateForce(Particle* particle)
 	else if (particle == p2) {
 		pos = p1->getPos() - p2->getPos();
 	}
-	float length = pos.magnitude();
+	float length = pos.normalize();
 	float delta = length - restingLength;
 	particle->addForce(pos * delta * k);
 
