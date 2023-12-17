@@ -21,3 +21,16 @@ void DragGenerator::updateForce(Particle* particle)
 		particle->addForce(force);
 	}
 }
+
+void DragGenerator::updateForce(PxRigidDynamic* rb)
+{
+	if (excludedRb.count(rb)) return;
+	Vector3 pPos = rb->getGlobalPose().p;
+	if (pPos.y < (pos + area / 2).y && pPos.y >(pos - area / 2).y
+		&& pPos.x < (pos + area / 2).x && pPos.x >(pos - area / 2).x)
+	{
+		Vector3 force = (vel - rb->getLinearVelocity());
+		force = k1 * force + k2 * force * force.magnitude();
+		rb->addForce(force);
+	}
+}

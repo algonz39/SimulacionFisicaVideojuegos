@@ -7,6 +7,7 @@ public:
 	DragGenerator(double lTime, Vector3 Pos, Vector3 Area, Vector3 Vel, float k1, float k2 = 0);
 	~DragGenerator();
 	void updateForce(Particle* particle) override;
+	void updateForce(PxRigidDynamic* rb) override;
 protected:
 	float k1;
 	float k2;

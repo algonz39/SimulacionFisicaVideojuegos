@@ -9,6 +9,7 @@ public:
 	~Random() {}
 	float generate(double t);
 	Vector3 getRandomVector(bool gausian);
+	Vector4 getRandomColor();
 
 
 private: 

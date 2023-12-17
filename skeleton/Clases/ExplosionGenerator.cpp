@@ -14,4 +14,14 @@ void ExplosionGenerator::updateForce(Particle* particle)
 	}
 }
 
+void ExplosionGenerator::updateForce(PxRigidDynamic* rb)
+{
+	if (excludedRb.count(rb)) return;
+	if ((rb->getGlobalPose().p - pos).magnitude() >= time * velocity) {
+		Vector3 force = (rb->getGlobalPose().p - pos) * K / pow((rb->getGlobalPose().p - pos).magnitude(), 2) * exp(-time / t);
+
+		rb->addForce(force);
+	}
+}
+
 

@@ -1,23 +1,35 @@
 #include "Rigidbody.h"
 
-RigidBody::RigidBody(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxShape* shape, PxReal density, Vector4 color, Vector3 linearVelocity, Vector3 angularVelocity, bool dynamic)
+PxRigidDynamic* RigidBody::getDynamic(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxShape* shape, PxReal density, Vector4 color, Vector3 linearVelocity, Vector3 angularVelocity)
 {
-	rb = gPhysics->createRigidDynamic(PxTransform(Pos));
+	PxRigidDynamic* rb = gPhysics->createRigidDynamic(PxTransform(Pos));
 	rb->setLinearVelocity(linearVelocity);
 	rb->setAngularVelocity(angularVelocity);
-	rb->attachShape(*shape);
 	PxRigidBodyExt::updateMassAndInertia(*rb, density);
+	rb->attachShape(*shape);
 	new RenderItem(shape, rb, color);
+	gScene->addActor(*rb);
+	return rb;
 }
 
-RigidBody::RigidBody(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxReal radius, PxReal density, Vector4 color, Vector3 linearVelocity, Vector3 angularVelocity, bool dynamic)
+PxRigidDynamic* RigidBody::getDynamic(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxReal radius, PxReal density, Vector4 color, Vector3 linearVelocity, Vector3 angularVelocity)
 {
-	PxShape* shape = CreateShape();
-	RigidBody(gPhysics, gScene, Pos, shape, density, color, linearVelocity, angularVelocity, dynamic);
+	PxShape* shape = CreateShape(physx::PxSphereGeometry(radius));
+	return getDynamic(gPhysics, gScene, Pos, shape, density, color, linearVelocity, angularVelocity);
 }
 
-RigidBody::RigidBody(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxReal x, PxReal y, PxReal z, PxReal density, Vector4 color, Vector3 linearVelocity, Vector3 angularVelocity, bool dynamic)
+PxRigidDynamic* RigidBody::getDynamic(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxReal x, PxReal y, PxReal z, PxReal density, Vector4 color, Vector3 linearVelocity, Vector3 angularVelocity)
 {
-	PxShape* shape = CreateShape();
-	RigidBody(gPhysics, gScene, Pos, shape, density, color, linearVelocity, angularVelocity, dynamic);
+	PxShape* shape = CreateShape(physx::PxBoxGeometry(x, y, z));
+	return getDynamic(gPhysics, gScene, Pos, shape, density, color, linearVelocity, angularVelocity);
+}
+
+
+PxRigidStatic* RigidBody::getStatic(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxShape* shape, Vector4 color)
+{
+	PxRigidStatic* rs = gPhysics->createRigidStatic(PxTransform(Pos));
+	rs->attachShape(*shape);
+	new RenderItem(shape, rs, color);
+	gScene->addActor(*rs);
+	return rs;
 }

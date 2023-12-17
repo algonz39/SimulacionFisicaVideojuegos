@@ -8,6 +8,7 @@
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
 #include "Clases/ParticleGenerator.h"
+#include "Clases/RigidBodyGenerator.h"
 #include "Clases/ParticleSystem.h"
 #include <iostream>
 #include "Clases/GravityGenerator.h"
@@ -50,9 +51,9 @@ void initPhysics(bool interactive)
 
 	gPvd = PxCreatePvd(*gFoundation);
 	PxPvdTransport* transport = PxDefaultPvdSocketTransportCreate(PVD_HOST, 5425, 10);
-	gPvd->connect(*transport,PxPvdInstrumentationFlag::eALL);
+	gPvd->connect(*transport, PxPvdInstrumentationFlag::eALL);
 
-	gPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *gFoundation, PxTolerancesScale(),true,gPvd);
+	gPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *gFoundation, PxTolerancesScale(), true, gPvd);
 
 	gMaterial = gPhysics->createMaterial(0.5f, 0.5f, 0.6f);
 
@@ -64,7 +65,15 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
-	pSystem = new ParticleSystem();
+
+#pragma region P5
+
+	pSystem = new ParticleSystem(gPhysics, gScene);
+	PxShape* shape = CreateShape(physx::PxBoxGeometry(200, 1, 200));
+	RigidBody::getStatic(gPhysics, gScene, { -20, 0, -20 }, shape, {1,1,1,1});
+	new RigidBodyGenerator({-20,40,-20},pSystem,0.05,10,10);
+	pSystem->addForce(new WhirlwindGenerator(25, Vector3(-20, 40, -20), Vector3(100, 100, 100), 5, 1));
+#pragma endregion
 
 #pragma region P4
 

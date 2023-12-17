@@ -19,3 +19,8 @@ void ForceGenerator::addExcluded(Particle* p)
 {
 	excluded.insert(p);
 }
+
+void ForceGenerator::addExcluded(PxRigidDynamic* rb)
+{
+	excludedRb.insert(rb);
+}

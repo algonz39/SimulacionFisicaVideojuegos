@@ -266,6 +266,7 @@
     <ClCompile Include="Clases\ParticleSystem.cpp" />
     <ClCompile Include="Clases\Random.cpp" />
     <ClCompile Include="Clases\Rigidbody.cpp" />
+    <ClCompile Include="Clases\RigidBodyGenerator.cpp" />
     <ClCompile Include="Clases\SpringGenerator.cpp" />
     <ClCompile Include="Clases\WhirlwindGenerator.cpp" />
     <ClCompile Include="main.cpp" />
@@ -287,6 +288,7 @@
     <ClInclude Include="Clases\ParticleSystem.h" />
     <ClInclude Include="Clases\Random.h" />
     <ClInclude Include="Clases\Rigidbody.h" />
+    <ClInclude Include="Clases\RigidBodyGenerator.h" />
     <ClInclude Include="Clases\SpringGenerator.h" />
     <ClInclude Include="Clases\WhirlwindGenerator.h" />
     <ClInclude Include="core.hpp" />

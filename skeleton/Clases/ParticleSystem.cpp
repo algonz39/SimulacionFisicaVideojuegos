@@ -1,22 +1,39 @@
 #include "ParticleSystem.h"
 #include "ParticleGenerator.h"
+#include "RigidBodyGenerator.h"
 #include "ForceGenerator.h"
 #include "Firework.h"
 #include <cmath>
 
-ParticleSystem::ParticleSystem() {
+
+ParticleSystem::ParticleSystem(PxPhysics* gPhysics, PxScene* gScene) : gPhysics(gPhysics), gScene(gScene) {
 	nParticles = 0;
 	nGenerators = 0;
+	nForces = 0;
+	nRigidBodys = 0;
 	cam = GetCamera();
 	rand = new Random();
 }
+
 
 ParticleSystem::~ParticleSystem() {
 	for (Particle* p : particles) {
 		if(p) delete p;
 	}
 	particles.clear();
-	nParticles = 0;
+	nParticles = 0;	
+	for (ParticleGenerator* g : generators) {
+		if (g) delete g;
+	}
+	generators.clear();
+	nGenerators = 0;
+	for (ForceGenerator* f : forces) {
+		if(f) delete f;
+	}
+	forces.clear();
+	nForces = 0;	
+	rigidBodys.clear();	
+	nRigidBodys = 0;
 	delete rand;
 }
 
@@ -68,6 +85,9 @@ void ParticleSystem::update(double t)
 			for (Particle* p : particles) {
 				f->updateForce(p);
 			}
+			for (PxRigidDynamic* rb : rigidBodys) {
+				if(rb != nullptr) f->updateForce(rb);
+			}
 			iter++;
 		}
 	}
@@ -85,6 +105,9 @@ void ParticleSystem::update(double t)
 		}
 	}
 	for (ParticleGenerator* g : generators) {
+		g->generate(t);
+	}
+	for (RigidBodyGenerator* g : rbGenerators) {
 		g->generate(t);
 	}
 	for (Particle* p : particlesToAdd) {
@@ -108,11 +131,25 @@ ParticleGenerator* ParticleSystem::addGenerator(ParticleGenerator* g)
 
 }
 
-ForceGenerator* ParticleSystem::addForce(ForceGenerator* f)
+RigidBodyGenerator* ParticleSystem::addRBGenerator(RigidBodyGenerator* g)
+{
+	rbGenerators.push_back(g);
+	nGenerators++;
+	return g;
+}
+
+ForceGenerator* ParticleSystem::addForce(ForceGenerator* f)	
 {
 	forces.push_back(f);
 	nForces++;
 	return f;
+}
+
+PxRigidActor* ParticleSystem::addRigidBody(PxRigidDynamic* rb)
+{
+	rigidBodys.push_back(rb);
+	nRigidBodys++;
+	return rb;
 }
 
 bool ParticleSystem::maxParticles()
@@ -120,7 +157,22 @@ bool ParticleSystem::maxParticles()
 	return nParticles >= MAX_PARTICLES;
 }
 
+bool ParticleSystem::maxRB()
+{
+	return nRigidBodys >= MAX_RB;
+}
+
 Random* ParticleSystem::getRand() {
 	return rand;
+}
+
+PxPhysics* ParticleSystem::getPhysics()
+{
+	return gPhysics;
+}
+
+PxScene* ParticleSystem::getScene()
+{
+	return gScene;
 }
 
