@@ -82,7 +82,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
       <AdditionalOptions>
@@ -263,6 +263,7 @@
     <ClCompile Include="Clases\GGenerator.cpp" />
     <ClCompile Include="Clases\GravityGenerator.cpp" />
     <ClCompile Include="Clases\LevelManager.cpp" />
+    <ClCompile Include="Clases\MagnetGenerator.cpp" />
     <ClCompile Include="Clases\Particle.cpp" />
     <ClCompile Include="Clases\ParticleGenerator.cpp" />
     <ClCompile Include="Clases\ParticleSystem.cpp" />
@@ -287,6 +288,7 @@
     <ClInclude Include="Clases\GGenerator.h" />
     <ClInclude Include="Clases\GravityGenerator.h" />
     <ClInclude Include="Clases\LevelManager.h" />
+    <ClInclude Include="Clases\MagnetGenerator.h" />
     <ClInclude Include="Clases\Particle.h" />
     <ClInclude Include="Clases\ParticleGenerator.h" />
     <ClInclude Include="Clases\ParticleSystem.h" />

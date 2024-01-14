@@ -59,6 +59,9 @@
     <ClCompile Include="Clases\Copter.cpp">
       <Filter>Clases\CPP</Filter>
     </ClCompile>
+    <ClCompile Include="Clases\MagnetGenerator.cpp">
+      <Filter>Clases\CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -117,6 +120,9 @@
     </ClInclude>
     <ClInclude Include="Clases\LevelManager.h" />
     <ClInclude Include="Clases\Copter.h">
+      <Filter>Clases\H</Filter>
+    </ClInclude>
+    <ClInclude Include="Clases\MagnetGenerator.h">
       <Filter>Clases\H</Filter>
     </ClInclude>
   </ItemGroup>

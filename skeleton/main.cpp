@@ -68,15 +68,14 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
+	pSystem = new ParticleSystem(gPhysics, gScene);
 
 
 #pragma region Project
 
-	pSystem = new ParticleSystem(gPhysics, gScene);
 	RigidBody::getStatic(gPhysics, gScene, { -20, 0, -20 }, CreateShape(physx::PxBoxGeometry(200, 1, 200)), {1,1,1,1});
-	pSystem->addForce(new GGenerator(-1, Vector3(0, -9.8, 0)));
 
-	new Copter(gPhysics,gScene,pSystem);
+	copter = new Copter(gPhysics, gScene, pSystem, Vector3{20,45,20});
 
 	//new RigidBodyGenerator({-20,40,-20},pSystem,0.05,10,10);
 	//pSystem->addForce(new WhirlwindGenerator(25, Vector3(-20, 40, -20), Vector3(100, 100, 100), 5, 1));
@@ -165,23 +164,34 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	//case ' ':	break;
 	case 'W':
 	{
-		copter->move(Vector3(-10, 0, -10));
+		copter->move(Vector3(-1, 0, -1).getNormalized());
 		break;
 	}
 	case 'A':
 	{
-		copter->move(Vector3(-10, 0, 10));
+		copter->move(Vector3(-1, 0, 1).getNormalized());
 		break;
 	}
 	case 'S':
 	{
-		copter->move(Vector3(10, 0, 10));
+		copter->move(Vector3(1, 0, 1).getNormalized());
 		break;
 	}
 
 	case 'D':
 	{
-		copter->move(Vector3(10, 0, -10));
+		copter->move(Vector3(1, 0, -1).getNormalized());
+		break;
+	}
+	case 'Q':
+	{
+		copter->extend(-1);
+		break;
+	}
+
+	case 'E':
+	{
+		copter->extend(1);
 		break;
 	}
 	case ' ':
