@@ -18,6 +18,8 @@
 #include "Clases/ExplosionGenerator.h"
 #include "Clases/SpringGenerator.h"
 #include "Clases/BouyancyForceGenerator.h"
+#include "Clases/Copter.h"
+#include "Clases/LevelManager.h"
 
 std::string display_text = "This is a test";
 
@@ -38,7 +40,8 @@ PxPvd*                  gPvd        = nullptr;
 PxDefaultCpuDispatcher*	gDispatcher = nullptr;
 PxScene*				gScene      = nullptr;
 ParticleSystem*			pSystem	    = nullptr;
-Particle*				red			= nullptr;
+Copter*					copter		= nullptr;
+
 ContactReportCallback gContactReportCallback;
 
 
@@ -66,13 +69,17 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
-#pragma region P5
+
+#pragma region Project
 
 	pSystem = new ParticleSystem(gPhysics, gScene);
-	PxShape* shape = CreateShape(physx::PxBoxGeometry(200, 1, 200));
-	RigidBody::getStatic(gPhysics, gScene, { -20, 0, -20 }, shape, {1,1,1,1});
-	new RigidBodyGenerator({-20,40,-20},pSystem,0.05,10,10);
-	pSystem->addForce(new WhirlwindGenerator(25, Vector3(-20, 40, -20), Vector3(100, 100, 100), 5, 1));
+	RigidBody::getStatic(gPhysics, gScene, { -20, 0, -20 }, CreateShape(physx::PxBoxGeometry(200, 1, 200)), {1,1,1,1});
+	pSystem->addForce(new GGenerator(-1, Vector3(0, -9.8, 0)));
+
+	new Copter(gPhysics,gScene,pSystem);
+
+	//new RigidBodyGenerator({-20,40,-20},pSystem,0.05,10,10);
+	//pSystem->addForce(new WhirlwindGenerator(25, Vector3(-20, 40, -20), Vector3(100, 100, 100), 5, 1));
 #pragma endregion
 
 #pragma region P4
@@ -156,56 +163,25 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 	//case 'B': break;
 	//case ' ':	break;
-	case 'Z':
+	case 'W':
 	{
-		pSystem->generateProjectile(pSystem->Pistol);
+		copter->move(Vector3(-10, 0, -10));
 		break;
 	}
-	case 'X':
+	case 'A':
 	{
-		pSystem->generateProjectile(pSystem->Artillery);
+		copter->move(Vector3(-10, 0, 10));
 		break;
 	}
-	case 'C':
+	case 'S':
 	{
-		pSystem->generateProjectile(pSystem->FireBall);
+		copter->move(Vector3(10, 0, 10));
 		break;
 	}
-	case 'V':
+
+	case 'D':
 	{
-		pSystem->generateProjectile(pSystem->Laser);
-		break;
-	}
-	case 'B':
-	{
-		pSystem->generateProjectile(pSystem->FireworkR);
-		break;
-	}
-	case 'N':
-	{
-		pSystem->generateProjectile(pSystem->FireworkC);
-		break;
-	}
-	case 'M':
-	{
-		pSystem->generateProjectile(pSystem->FireworkS);
-		break;
-	}	
-	case 'K':
-	{
-		pSystem->addForce(new ExplosionGenerator(2, Vector3(25, 40, 25), 30, 2000, 100));
-		break;
-	}
-	case 'G':
-	{
-		if(red) red->setMass(red->getMass() - 1000);
-		std::cout << "Masa: " << red->getMass() << " kg | Densidad: " << red->getMass()/10 << " kg/m3\n";
-		break;
-	}
-	case 'H':
-	{
-		if (red) red->setMass(red->getMass() + 1000);
-		std::cout << "Masa: " << red->getMass() << "kg | Densidad: " << red->getMass() / 10 << "kg/m3\n";
+		copter->move(Vector3(10, 0, -10));
 		break;
 	}
 	case ' ':

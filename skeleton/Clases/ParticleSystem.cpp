@@ -37,40 +37,40 @@ ParticleSystem::~ParticleSystem() {
 	delete rand;
 }
 
-void ParticleSystem::generateProjectile(ProjectileType type) {
-	if (maxParticles()) return;
-	Vector3 pos = cam->getEye();
-	Vector3 vel = cam->getDir();
-	Vector3 grav = {0,0,0};
-	Particle* projectile;
-	switch (type)
-	{
-	case Pistol:
-		projectile = new Particle(pos, vel * 20.0, grav / 10, 2, {0.5, 0.5, 0.5, 1});
-		break;
-	case Artillery:
-		projectile = new Particle(pos, vel * 20.0, grav * 2, 200, { 0.5, 0.5, 0.5, 1 }, 3);
-		break;
-	case FireBall:
-		projectile = new Particle(pos, vel * 10.0, grav * -0.06, 1, { 1, 0, 0, 1 });
-		break;
-	case Laser:
-		projectile = new Particle(pos, vel * 40.0, grav * 0, 0.1, { 1, 1, 0, 1 });
-		break;
-	case FireworkR:
-		projectile = new Firework(pos, vel * 35.0, grav * 0.05, this, Firework::Fireworks);
-		break;
-	case FireworkC:
-		projectile = new Firework(pos, vel * 35.0, grav * 0.05, this, Firework::Circles);
-		break;
-	case FireworkS:
-		projectile = new Firework(pos, vel * 35.0, grav * 0.05, this, Firework::Swirl);
-		break;
-	default:
-		break;
-	}
-	addParticle(projectile);
-}
+//void ParticleSystem::generateProjectile(ProjectileType type) {
+//	if (maxParticles()) return;
+//	Vector3 pos = cam->getEye();
+//	Vector3 vel = cam->getDir();
+//	Vector3 grav = {0,0,0};
+//	Particle* projectile;
+//	switch (type)
+//	{
+//	case Pistol:
+//		projectile = new Particle(pos, vel * 20.0, grav / 10, 2, {0.5, 0.5, 0.5, 1});
+//		break;
+//	case Artillery:
+//		projectile = new Particle(pos, vel * 20.0, grav * 2, 200, { 0.5, 0.5, 0.5, 1 }, 3);
+//		break;
+//	case FireBall:
+//		projectile = new Particle(pos, vel * 10.0, grav * -0.06, 1, { 1, 0, 0, 1 });
+//		break;
+//	case Laser:
+//		projectile = new Particle(pos, vel * 40.0, grav * 0, 0.1, { 1, 1, 0, 1 });
+//		break;
+//	case FireworkR:
+//		projectile = new Firework(pos, vel * 35.0, grav * 0.05, this, Firework::Fireworks);
+//		break;
+//	case FireworkC:
+//		projectile = new Firework(pos, vel * 35.0, grav * 0.05, this, Firework::Circles);
+//		break;
+//	case FireworkS:
+//		projectile = new Firework(pos, vel * 35.0, grav * 0.05, this, Firework::Swirl);
+//		break;
+//	default:
+//		break;
+//	}
+//	addParticle(projectile);
+//}
 
 void ParticleSystem::update(double t)
 {
