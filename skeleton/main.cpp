@@ -41,6 +41,7 @@ PxDefaultCpuDispatcher*	gDispatcher = nullptr;
 PxScene*				gScene      = nullptr;
 ParticleSystem*			pSystem	    = nullptr;
 Copter*					copter		= nullptr;
+LevelManager*			lvlManager  = nullptr;
 
 ContactReportCallback gContactReportCallback;
 
@@ -73,10 +74,8 @@ void initPhysics(bool interactive)
 
 #pragma region Project
 
-	RigidBody::getStatic(gPhysics, gScene, { -20, 0, -20 }, CreateShape(physx::PxBoxGeometry(200, 1, 200)), {1,1,1,1});
-
-	copter = new Copter(gPhysics, gScene, pSystem, Vector3{20,45,20});
-
+	copter = new Copter(gPhysics, gScene, pSystem, Vector3{15,45,15});
+	lvlManager = new LevelManager(gPhysics, gScene, pSystem);
 	//new RigidBodyGenerator({-20,40,-20},pSystem,0.05,10,10);
 	//pSystem->addForce(new WhirlwindGenerator(25, Vector3(-20, 40, -20), Vector3(100, 100, 100), 5, 1));
 #pragma endregion
@@ -130,6 +129,7 @@ void stepPhysics(bool interactive, double t)
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 	pSystem->update(t);
+	copter->move();
 }
 
 // Function to clean data
@@ -158,29 +158,34 @@ void keyPress(unsigned char key, const PxTransform& camera)
 {
 	PX_UNUSED(camera);
 
+
 	switch(toupper(key))
 	{
 	//case 'B': break;
 	//case ' ':	break;
 	case 'W':
 	{
-		copter->move(Vector3(-1, 0, -1).getNormalized());
+		copter->addMovement(Vector3(-1, 0, -1));
 		break;
 	}
 	case 'A':
 	{
-		copter->move(Vector3(-1, 0, 1).getNormalized());
+		copter->addMovement(Vector3(-1, 0, 1));
 		break;
 	}
 	case 'S':
 	{
-		copter->move(Vector3(1, 0, 1).getNormalized());
+		copter->addMovement(Vector3(1, 0, 1));
 		break;
 	}
 
 	case 'D':
 	{
-		copter->move(Vector3(1, 0, -1).getNormalized());
+		copter->addMovement(Vector3(1, 0, -1));
+		break;
+	}
+	case ' ': {
+		copter->resetMovement();
 		break;
 	}
 	case 'Q':
@@ -192,10 +197,6 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case 'E':
 	{
 		copter->extend(1);
-		break;
-	}
-	case ' ':
-	{
 		break;
 	}
 	default:

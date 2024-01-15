@@ -85,9 +85,9 @@ void Camera::handleMotion(int x, int y)
 
 	PxVec3 viewY = mDir.cross(PxVec3(0,1,0)).getNormalized();
 
-	PxQuat qx(PxPi * dx / 180.0f, PxVec3(0,1,0));
+	PxQuat qx(PxPi * dx / 90.0f, PxVec3(0,1,0));
 	mDir = qx.rotate(mDir);
-	PxQuat qy(PxPi * dy / 180.0f, viewY);
+	PxQuat qy(PxPi * dy / 90.0f, viewY);
 	mDir = qy.rotate(mDir);
 
 	mDir.normalize();
@@ -120,6 +120,11 @@ PxVec3 Camera::getDir() const
 void Camera::setEye(PxVec3 dir)
 {
 	mEye += dir;
+}
+
+void Camera::resetDir()
+{
+	mDir = PxVec3(-1.0f, -1.0f, -1.0f).getNormalized();
 }
 
 }

@@ -25,9 +25,9 @@ PxRigidDynamic* RigidBody::getDynamic(PxPhysics* gPhysics, PxScene* gScene, Vect
 }
 
 
-PxRigidStatic* RigidBody::getStatic(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxShape* shape, Vector4 color)
+PxRigidStatic* RigidBody::getStatic(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxShape* shape, Vector4 color, PxQuat rot)
 {
-	PxRigidStatic* rs = gPhysics->createRigidStatic(PxTransform(Pos));
+	PxRigidStatic* rs = gPhysics->createRigidStatic(PxTransform(Pos,rot));
 	rs->attachShape(*shape);
 	new RenderItem(shape, rs, color);
 	gScene->addActor(*rs);

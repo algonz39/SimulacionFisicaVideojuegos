@@ -22,7 +22,7 @@ private:
 	std::vector<Particle*> particles;
 	std::vector<ForceGenerator*> forces;
 	std::vector<ParticleGenerator*> generators;
-	std::vector<PxRigidDynamic*> rigidBodys;
+	std::vector<PxRigidActor*> rigidBodys;
 	std::vector<PxRigidStatic*> rigidStatics;
 
 	bool levelCompleted;

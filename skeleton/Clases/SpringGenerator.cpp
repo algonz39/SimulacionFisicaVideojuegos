@@ -56,7 +56,7 @@ void SpringGenerator::updateForce(PxRigidDynamic* rigid)
 		pos = fixedPos - rb->getGlobalPose().p;
 	}
 	float length = pos.normalize();
-	rigid->addForce(pos * k * length);
+	rigid->addForce(pos * k * length*length);
 
 }
 

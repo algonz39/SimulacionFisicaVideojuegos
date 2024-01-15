@@ -14,4 +14,5 @@ void MagnetGenerator::updateForce(PxRigidDynamic* rb)
 	Vector3 force = (magnet->getGlobalPose().p - rb->getGlobalPose().p) * magnetForce / pow((magnet->getGlobalPose().p - rb->getGlobalPose().p).magnitude(), 2);
 	
 	rb->addForce(force);
+	magnet->addForce(-force);
 }
