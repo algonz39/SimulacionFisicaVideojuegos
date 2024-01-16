@@ -75,7 +75,7 @@ void initPhysics(bool interactive)
 #pragma region Project
 
 	copter = new Copter(gPhysics, gScene, pSystem, Vector3{15,45,15});
-	lvlManager = new LevelManager(gPhysics, gScene, pSystem);
+	lvlManager = new LevelManager(gPhysics, gScene, pSystem, copter);
 	//new RigidBodyGenerator({-20,40,-20},pSystem,0.05,10,10);
 	//pSystem->addForce(new WhirlwindGenerator(25, Vector3(-20, 40, -20), Vector3(100, 100, 100), 5, 1));
 #pragma endregion
@@ -130,6 +130,7 @@ void stepPhysics(bool interactive, double t)
 	gScene->fetchResults(true);
 	pSystem->update(t);
 	copter->move();
+	lvlManager->update(t);
 }
 
 // Function to clean data
@@ -150,6 +151,8 @@ void cleanupPhysics(bool interactive)
 	gFoundation->release();
 
 	delete pSystem;
+	delete copter;
+	delete lvlManager;
 
 }
 
@@ -199,6 +202,11 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		copter->extend(1);
 		break;
 	}
+	case 'R': {
+		lvlManager->addTarget();
+		break;
+	}
+
 	default:
 		break;
 	}
@@ -206,8 +214,12 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 {
-	PX_UNUSED(actor1);
-	PX_UNUSED(actor2);
+	if(lvlManager->isTarget(actor1) && lvlManager->isGoal(actor2)) {
+		lvlManager->score();
+	}
+	else if (lvlManager->isTarget(actor2) && lvlManager->isGoal(actor1)) {
+		lvlManager->score();
+	}
 }
 
 

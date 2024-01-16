@@ -1,24 +1,24 @@
 #include "Rigidbody.h"
 
-PxRigidDynamic* RigidBody::getDynamic(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxShape* shape, PxReal density, Vector4 color, Vector3 linearVelocity, Vector3 angularVelocity)
+std::pair<PxRigidDynamic*, RenderItem*> RigidBody::getDynamic(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxShape* shape, PxReal density, Vector4 color, Vector3 linearVelocity, Vector3 angularVelocity)
 {
 	PxRigidDynamic* rb = gPhysics->createRigidDynamic(PxTransform(Pos));
 	rb->setLinearVelocity(linearVelocity);
 	rb->setAngularVelocity(angularVelocity);
 	PxRigidBodyExt::updateMassAndInertia(*rb, density);
 	rb->attachShape(*shape);
-	new RenderItem(shape, rb, color);
+	RenderItem* render = new RenderItem(shape, rb, color);
 	gScene->addActor(*rb);
-	return rb;
+	return { rb,render };
 }
 
-PxRigidDynamic* RigidBody::getDynamic(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxReal radius, PxReal density, Vector4 color, Vector3 linearVelocity, Vector3 angularVelocity)
+std::pair<PxRigidDynamic*, RenderItem*> RigidBody::getDynamic(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxReal radius, PxReal density, Vector4 color, Vector3 linearVelocity, Vector3 angularVelocity)
 {
 	PxShape* shape = CreateShape(physx::PxSphereGeometry(radius));
 	return getDynamic(gPhysics, gScene, Pos, shape, density, color, linearVelocity, angularVelocity);
 }
 
-PxRigidDynamic* RigidBody::getDynamic(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxReal x, PxReal y, PxReal z, PxReal density, Vector4 color, Vector3 linearVelocity, Vector3 angularVelocity)
+std::pair<PxRigidDynamic*, RenderItem*> RigidBody::getDynamic(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxReal x, PxReal y, PxReal z, PxReal density, Vector4 color, Vector3 linearVelocity, Vector3 angularVelocity)
 {
 	PxShape* shape = CreateShape(physx::PxBoxGeometry(x, y, z));
 	return getDynamic(gPhysics, gScene, Pos, shape, density, color, linearVelocity, angularVelocity);

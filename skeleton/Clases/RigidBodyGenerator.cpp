@@ -15,7 +15,7 @@ void RigidBodyGenerator::generate(double t)
 {
 	Random* rd = sys->getRand();
 	if (rd->generate(1) < genProb && !sys->maxRB()) {
-		PxRigidDynamic* rb;
+		std::pair<PxRigidDynamic*, RenderItem*> rb;
 		if (sys->getRand()->generate(1) < 0.5)
 			rb = RigidBody::getDynamic(sys->getPhysics(), sys->getScene(), pos + sys->getRand()->getRandomVector(false) * radius,
 				1 + rd->generate(9), 1000, rd->getRandomColor(), sys->getRand()->getRandomVector(false) * velocity);

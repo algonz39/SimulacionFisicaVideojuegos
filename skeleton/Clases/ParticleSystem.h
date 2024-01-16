@@ -5,6 +5,7 @@
 #include "Particle.h"
 #include "Random.h"
 #include <vector>
+#include <unordered_map>
 
 class ParticleGenerator;
 class ForceGenerator;
@@ -33,7 +34,8 @@ public:
 	ParticleGenerator* addGenerator(ParticleGenerator* p);
 	RigidBodyGenerator* addRBGenerator(RigidBodyGenerator* p);
 	ForceGenerator* addForce(ForceGenerator* f);
-	PxRigidActor* addRigidBody(PxRigidDynamic* rb);
+	PxRigidDynamic* addRigidBody(std::pair<PxRigidDynamic*, RenderItem*>);
+	void releaseRb(PxRigidDynamic* rb);
 	bool maxParticles();
 	bool maxRB();
 	Random* getRand();
@@ -49,6 +51,7 @@ private:
 	std::vector<ParticleGenerator*> generators;
 	std::vector<RigidBodyGenerator*> rbGenerators;
 	std::vector<PxRigidDynamic*> rigidBodys;
+	std::unordered_map<PxRigidDynamic*, RenderItem*> renderItems;
 
 	const int MAX_PARTICLES = 1000;
 	const int MAX_RB = 100;

@@ -3,13 +3,13 @@
 #include <PxPhysicsAPI.h>
 
 Copter::Copter(PxPhysics* gPhysics, PxScene* gScene, ParticleSystem* pSystem, Vector3 pos) : gPhysics(gPhysics), gScene(gScene), pSystem(pSystem),
-	magnetOffset(Vector3(0, 10, 0)), movement(0,0,0), extension(0)
+	ogPos(pos), magnetOffset(Vector3(0, 10, 0)), movement(0,0,0), extension(0)
 {
 	cam = GetCamera();
 
 	top1 = RigidBody::getStatic(gPhysics, gScene, { pos }, CreateShape(physx::PxBoxGeometry(6, 1, 2)), { 1,0,0,1 });
 	top2 = RigidBody::getStatic(gPhysics, gScene, { pos }, CreateShape(physx::PxBoxGeometry(2, 1, 6)), { 1,0,0,1 });
-	pSystem->addRigidBody(magnet = RigidBody::getDynamic(gPhysics, gScene, pos - magnetOffset, 1, 0.5, 1, 30, { 0.1,0.1,0.1,1 }));
+	magnet = pSystem->addRigidBody(RigidBody::getDynamic(gPhysics, gScene, pos - magnetOffset, 1, 0.5, 1, 30, { 0.1,0.1,0.1,1 }));
 
 	pSystem->addForce(chain = new SpringGenerator(-1, 100, 10, pos - magnetOffset, magnet));
 	pSystem->addForce(magnetF = new MagnetGenerator(magnet, 120, -1 ));
@@ -46,7 +46,7 @@ void Copter::move()
 
 	magnetOffset.y += extension * 0.1;
 	if (magnetOffset.y < 5) magnetOffset.y = 5;
-	else if (magnetOffset.y > 30) magnetOffset.y = 30;
+	else if (magnetOffset.y > 35) magnetOffset.y = 35;
 	chain->setFPos(top1->getGlobalPose().p - magnetOffset);
 	magnet->setAngularVelocity(PxVec3(0.0f, 0.0f, 0.0f));
 
@@ -70,7 +70,23 @@ void Copter::resetMovement()
 	extension = 0;
 	magnet->setAngularVelocity(PxVec3(0.0f, 0.0f, 0.0f));
 	magnet->setLinearVelocity(PxVec3(0.0f, 0.0f, 0.0f));
-	cam->resetDir();
+	magnet->clearForce();
+}
+
+void Copter::reset()
+{
+	movement = Vector3(0, 0, 0);
+	extension = 0;
+	magnetOffset = Vector3(0, 10, 0);
+	PxTransform newPose{ ogPos };
+	chain->setFPos(newPose.p - magnetOffset);
+	top1->setGlobalPose(newPose);
+	top2->setGlobalPose(newPose);
+	newPose.p -= magnetOffset;
+	magnet->setGlobalPose({ newPose });
+	magnet->setAngularVelocity(PxVec3(0.0f, 0.0f, 0.0f));
+	magnet->setLinearVelocity(PxVec3(0.0f, 0.0f, 0.0f));
+	cam->resetPos();
 }
 
 void Copter::extend(int value)

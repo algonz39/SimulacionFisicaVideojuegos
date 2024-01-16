@@ -122,9 +122,9 @@ void Camera::setEye(PxVec3 dir)
 	mEye += dir;
 }
 
-void Camera::resetDir()
+void Camera::resetPos()
 {
-	mDir = PxVec3(-1.0f, -1.0f, -1.0f).getNormalized();
+	mEye = PxVec3(50.0f, 55.0f, 50.0f);
 }
 
 }

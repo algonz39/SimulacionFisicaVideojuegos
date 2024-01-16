@@ -15,8 +15,9 @@ public:
 	void move();
 	void addMovement(Vector3 mov);
 	void resetMovement();
+	void reset();
 	void extend(int value);
-	void Copter::cableTransform();
+	void cableTransform();
 
 private: 
 
@@ -36,6 +37,7 @@ private:
 	RenderItem* shadowB;
 	PxTransform shadowTr;
 
+	Vector3 ogPos;
 	Vector3 movement;
 	Vector3 magnetOffset;
 	float extension;

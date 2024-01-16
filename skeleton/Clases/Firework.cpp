@@ -6,6 +6,7 @@ Firework::Firework(Vector3 Pos, Vector3 Vel, Vector3 Acc, ParticleSystem* Sys, F
 
 Firework::~Firework()
 {
+	if(this->isDead())
 	onDeath();
 }
 
@@ -15,7 +16,7 @@ void Firework::onDeath()
 	switch (fire) {
 	case Random:
 		for (int i = 0; i < nParticles; ++i) {
-			Particle* p = new Particle(pos.p, sys->getRand()->getRandomVector(true) * 15, { 0,0,0 }, 1, color[sys->getRand()->generate(3)]);
+			Particle* p = new Particle(pos.p, sys->getRand()->getRandomVector(true) * 15, { 0,0,0 }, 1, color[sys->getRand()->generate(3)],1, sys->getRand()->generate(2) + 1);
 			if (!sys->maxParticles()) {
 				sys->addParticle(p);
 			}

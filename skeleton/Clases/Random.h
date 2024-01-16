@@ -1,6 +1,7 @@
 #pragma once
-#include "../core.hpp"
 #include <random>
+#include "../core.hpp"
+#include "../RenderUtils.hpp"
 
 class Random
 {
@@ -11,6 +12,7 @@ public:
 	Vector3 getRandomVector(bool gausian);
 	Vector4 getRandomColor();
 
+	physx::PxShape* getRandomShape(physx::PxMaterial* mat = nullptr);
 
 private: 
 
