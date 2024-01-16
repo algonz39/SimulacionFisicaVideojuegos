@@ -1,8 +1,18 @@
-# SimulacionFisicaVideojuegos
-Repositorio de las prácticas de la asignatura de Simulación Física de Videojuegos
+# SimulacionFisicaVideojuegos : Proyecto Final
 
-En la carpeta skeleton estará vuestro código fuente
+# Amazon Dron Delivery
 
-Necesitaréis además descomprimir el archivo que se indica a continuación en la raíz del repositorio:
+## Descripción
 
-Carpetas bin y common https://ucomplutense-my.sharepoint.com/:u:/g/personal/davalejo_ucm_es/EZcsdyIoqTFOrF4hdfkVYk0BJZ9IycJ3QqXQFwaXVrlSKg?e=pfs6IO
+En Amazon Dron Delivery (ADD) encarnas a un repartidor de amazon en su primer dia como piloto de drones. Tendrás la labor de repartir todos los paquetes necesarios en el menor tiempo posible y ,a ser posible, evitando perder alguno por el camino.
+
+## Controles
+Para obtener este objetivo podremos desplazar el dron en el plano xz cambiando su vector de movimiento con nuestro input y mover arriba y abajo el iman que usaremos para enganchar los paquetes acortando o alargando el cable que lo une al dron.
+
+|         Tecla  |Accion                          | Explicación |
+|----------------|-------------------------------|-|
+|W A S D|`'Control del movimiento del dron'`            |Añade movimiento al dron en la dirección pulsada|
+|Q E          |`'Subir y bajar el iman'`            |Añade movimiento al punto de anclaje del iman|
+|Espacio|`Detener por completo el dron y el iman`|Establece todos los movimientos a cero|
+
+```
