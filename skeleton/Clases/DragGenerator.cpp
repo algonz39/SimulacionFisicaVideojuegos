@@ -27,7 +27,8 @@ void DragGenerator::updateForce(PxRigidDynamic* rb)
 	if (excludedRb.count(rb)) return;
 	Vector3 pPos = rb->getGlobalPose().p;
 	if (pPos.y < (pos + area / 2).y && pPos.y >(pos - area / 2).y
-		&& pPos.x < (pos + area / 2).x && pPos.x >(pos - area / 2).x)
+		&& pPos.x < (pos + area / 2).x && pPos.x >(pos - area / 2).x 
+		&& pPos.z < (pos + area / 2).x&& pPos.z >(pos - area / 2).z)
 	{
 		Vector3 force = (vel - rb->getLinearVelocity());
 		force = k1 * force + k2 * force * force.magnitude();

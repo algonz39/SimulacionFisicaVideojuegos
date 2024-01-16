@@ -19,6 +19,8 @@ public:
 	void extend(int value);
 	void cableTransform();
 	void setTarget(PxRigidDynamic* target);
+	PxRigidDynamic* getMagnet();
+
 
 private: 
 

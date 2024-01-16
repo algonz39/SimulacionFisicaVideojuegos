@@ -31,6 +31,7 @@ PxDefaultErrorCallback	gErrorCallback;
 
 PxFoundation*			gFoundation = nullptr;
 PxPhysics*				gPhysics	= nullptr;
+PxCooking*				gCooking	= nullptr;
 
 
 PxMaterial*				gMaterial	= nullptr;
@@ -59,6 +60,8 @@ void initPhysics(bool interactive)
 
 	gPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *gFoundation, PxTolerancesScale(), true, gPvd);
 
+	gCooking = PxCreateCooking(PX_PHYSICS_VERSION, *gFoundation, PxCookingParams(PxTolerancesScale()));
+
 	gMaterial = gPhysics->createMaterial(0.5f, 0.5f, 0.6f);
 
 	// For Solid Rigids +++++++++++++++++++++++++++++++++++++
@@ -75,13 +78,15 @@ void initPhysics(bool interactive)
 #pragma region Project
 
 	copter = new Copter(gPhysics, gScene, pSystem, Vector3{15,45,15});
-	lvlManager = new LevelManager(gPhysics, gScene, pSystem, copter);
-	//new RigidBodyGenerator({-20,40,-20},pSystem,0.05,10,10);
-	//pSystem->addForce(new WhirlwindGenerator(25, Vector3(-20, 40, -20), Vector3(100, 100, 100), 5, 1));
+	lvlManager = new LevelManager(gPhysics, gScene, pSystem, gCooking, copter);
 #pragma endregion
 
 }
 
+void renderUI()
+{
+
+}
 
 // Function to configure what happens in each step of physics
 // interactive: true if the game is rendering, false if it offline
@@ -95,7 +100,9 @@ void stepPhysics(bool interactive, double t)
 	pSystem->update(t);
 	copter->move();
 	lvlManager->update(t);
+	renderUI();
 }
+
 
 // Function to clean data
 // Add custom code to the begining of the function

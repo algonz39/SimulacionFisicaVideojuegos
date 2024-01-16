@@ -14,21 +14,9 @@ class RigidBodyGenerator;
 
 class ParticleSystem {
 public:
-	//enum ProjectileType {
-	//	Pistol,
-	//	Artillery,
-	//	FireBall,
-	//	Laser,
-	//	Fireworks,
-	//	FireworkR,
-	//	FireworkC,
-	//	FireworkS,
-	//	LastEnum
-	//};
 
 	ParticleSystem(PxPhysics* gPhysics, PxScene* gScene);
 	~ParticleSystem();
-	//void generateProjectile(ProjectileType type);
 	void update(double t);
 	Particle* addParticle(Particle* p);
 	ParticleGenerator* addGenerator(ParticleGenerator* p);

@@ -29,12 +29,17 @@ PxRigidStatic* RigidBody::getStatic(PxPhysics* gPhysics, PxScene* gScene, Vector
 {
 	PxRigidStatic* rs = gPhysics->createRigidStatic(PxTransform(Pos,rot));
 	rs->attachShape(*shape);
-	staticRender.insert({ rs,new RenderItem(shape, rs, color) });
+	new RenderItem(shape, rs, color);
 	gScene->addActor(*rs);
 	return rs;
 }
 
-RenderItem* RigidBody::getRender(PxRigidStatic* rs)
+std::pair<PxRigidStatic*, RenderItem*>  RigidBody::getStaticandRender(PxPhysics* gPhysics, PxScene* gScene, Vector3 Pos, PxShape* shape, Vector4 color, PxQuat rot)
 {
-	return staticRender.at(rs);
+	PxRigidStatic* rs = gPhysics->createRigidStatic(PxTransform(Pos,rot));
+	rs->attachShape(*shape);
+	RenderItem* render = new RenderItem(shape, rs, color);
+	gScene->addActor(*rs);
+	return { rs,render };
 }
+

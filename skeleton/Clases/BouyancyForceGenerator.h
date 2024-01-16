@@ -12,6 +12,7 @@ protected:
 	float height;
 	float volume;
 	float density;
+	Vector3 area;
 	const float gravity = 9.8;
 	Particle* liquidParticle;
 };

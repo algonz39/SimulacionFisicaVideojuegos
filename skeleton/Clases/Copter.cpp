@@ -114,3 +114,8 @@ void Copter::setTarget(PxRigidDynamic* target)
 	magnetF->setTarget(target);
 }
 
+PxRigidDynamic* Copter::getMagnet()
+{
+	return magnet;
+}
+
