@@ -21,7 +21,6 @@
 #include "Clases/Copter.h"
 #include "Clases/LevelManager.h"
 
-std::string display_text = "This is a test";
 
 
 using namespace physx;
@@ -43,6 +42,10 @@ PxScene*				gScene      = nullptr;
 ParticleSystem*			pSystem	    = nullptr;
 Copter*					copter		= nullptr;
 LevelManager*			lvlManager  = nullptr;
+
+std::string			display_text_1	= "Test";
+std::string			display_text_2	= "Test";
+
 
 ContactReportCallback gContactReportCallback;
 
@@ -85,7 +88,19 @@ void initPhysics(bool interactive)
 
 void renderUI()
 {
-
+	if (lvlManager->isGameOver()) {
+		display_text_1 = "¡FIN DEL JUEGO! ¡TODOS LOS PAQUETES ENTREGADOS!";
+		display_text_2 = "Tiempo empleado: " + lvlManager->getElapsedTime() + "   Paquetes perdidos: " + std::to_string(lvlManager->getLostParcels());
+	}
+	else {
+		display_text_1 = "Nivel: " + std::to_string(lvlManager->getcurrentLevel()) + "     Tiempo empleado: " + lvlManager->getElapsedTime();
+		int pac = lvlManager->getTargetScore() - lvlManager->getcurrentScore();
+		if (pac > 0)
+			display_text_2 = "Paquetes por entregar: " + std::to_string(pac) + " de " + std::to_string(lvlManager->getTargetScore());
+		else {
+			display_text_2 = "Siguiente envio en: " + lvlManager->getNextLevelTimer() + " segundos";
+		}
+	}
 }
 
 // Function to configure what happens in each step of physics

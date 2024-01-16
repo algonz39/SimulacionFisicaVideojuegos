@@ -2,9 +2,11 @@
 #include "DragGenerator.h"
 #include "WhirlwindGenerator.h"
 #include "BouyancyForceGenerator.h"
+#include <sstream>
+#include <iomanip>
 
 LevelManager::LevelManager(PxPhysics* gPhysics, PxScene* gScene, ParticleSystem* pSystem, PxCooking* gCooking, Copter* copter) : gPhysics(gPhysics), gScene(gScene), pSystem(pSystem), 
-	gCooking(gCooking),	copter(copter), nextLevelTimer(-1), needTarget(false), currentLevel(1), currentScore(0)
+	gCooking(gCooking),	copter(copter), nextLevelTimer(-1), needTarget(false), currentLevel(1), currentScore(0), elapsedTime(0), lostParcels(0), gameOver(false)
 {
 	std::tie(base, baseRender) = 
 		RigidBody::getStaticandRender(gPhysics, gScene, { 10, 0, 10 }, CreateShape(physx::PxBoxGeometry(20, 1, 20)), { 0.4,0.4,0.4,1 }, PxQuat(PxPi / 4, { 0,1,0 }));
@@ -63,14 +65,9 @@ void LevelManager::loadLevel()
 		forces.push_back(pSystem->addForce(new WhirlwindGenerator(-1, { -30,10,-30 }, { 30,70,30 }, 2, 5)));
 		addTarget();
 		break;
-
 	case 5:
-		addTarget();
+		gameOver = true;
 		break;
-	case 6:
-		gameOver();
-		break;
-
 	default:
 		break;
 	}
@@ -96,15 +93,11 @@ void LevelManager::unloadLevel()
 	loadLevel();
 }
 
-void LevelManager::gameOver() {
-
-}
-
 void LevelManager::score()
 {
 	currentScore++;
-	new ParticleGenerator({ -75, 0, -150 }, pSystem, Firework::Fireworks, 0.015, 10, 3, 3);
-	new ParticleGenerator({ -150, 0, -75 }, pSystem, Firework::Fireworks, 0.015, 10, 3, 3);
+	new ParticleGenerator({ -75, 0, -150 }, pSystem, Firework::Fireworks, 0.05, 10, 3, 0.75);
+	new ParticleGenerator({ -150, 0, -75 }, pSystem, Firework::Fireworks, 0.05, 10, 3, 0.75);
 	target->setAngularVelocity(PxVec3(0.0f, 0.0f, 0.0f));
 	target->setLinearVelocity(PxVec3(0.0f, 0.0f, 0.0f));
 	target->clearForce();
@@ -114,17 +107,19 @@ void LevelManager::score()
 		needTarget = true;
 	}
 	else {
-		nextLevelTimer = 5;
+		nextLevelTimer = 3.5;
 	}
 }
 
 void LevelManager::update(double t)
 {
+
 	for (auto iter = rigidBodys.begin(); iter != rigidBodys.end();) {
 		PxRigidDynamic* rb = *iter;
 		if (rb->getGlobalPose().p.y < -20) {
 			iter = rigidBodys.erase(iter);
 			pSystem->releaseRb(rb);
+			lostParcels++;
 			if (isTarget(rb)) {
 				needTarget = true;
 				target = nullptr;
@@ -132,7 +127,10 @@ void LevelManager::update(double t)
 			else {
 				--currentScore;
 				if (currentScore < MAX_SCORES[currentLevel - 1])
+				{
 					nextLevelTimer = -1;
+					if(target == nullptr) needTarget = true;
+				}
 			}
 		}
 		else {
@@ -148,6 +146,8 @@ void LevelManager::update(double t)
 			unloadLevel();
 		}
 	}
+	else if(!gameOver)elapsedTime += t;
+
 }
 
 void LevelManager::addTarget()
@@ -198,10 +198,26 @@ int LevelManager::getcurrentScore() {
 };
 
 int LevelManager::getTargetScore() {
-	return MAX_SCORES[currentLevel];
+	return MAX_SCORES[currentLevel-1];
 }
 
-double LevelManager::getNextLevelTimer() {
-	return nextLevelTimer;
+int LevelManager::getLostParcels() {
+	return lostParcels;
+}
+
+bool LevelManager::isGameOver() {
+	return gameOver;
+}
+
+std::string LevelManager::getNextLevelTimer(int dec) {
+	std::stringstream ss;
+	ss << std::fixed << std::setprecision(1) << nextLevelTimer;
+	return ss.str();
+}
+
+std::string LevelManager::getElapsedTime(int dec) {
+	std::stringstream ss;
+	ss << std::fixed << std::setprecision(dec) << elapsedTime;
+	return ss.str();
 }
 

@@ -12,7 +12,6 @@ public:
 
 	void loadLevel();
 	void unloadLevel();
-	void gameOver();
 	void score();
 	void update(double t);
 	void addTarget();
@@ -24,12 +23,14 @@ public:
 	int getcurrentLevel();
 	int getcurrentScore();
 	int getTargetScore();
-	double getNextLevelTimer();
+	int getLostParcels();
+	bool isGameOver();
+	std::string getNextLevelTimer(int dec = 1);
+	std::string getElapsedTime(int dec = 1);
 
 private: 
 
-	const int MAX_LEVEL = 5;
-	const int MAX_SCORES[5] = { 3, 3, 2, 2, 3};
+	const int MAX_SCORES[4] = { 3, 3, 2, 2};
 	std::vector<ForceGenerator*> forces;
 	std::vector<ParticleGenerator*> generators;
 	std::vector<PxRigidDynamic*> rigidBodys;
@@ -39,9 +40,12 @@ private:
 
 
 	double nextLevelTimer;
-	bool needTarget;
+	double elapsedTime;
 	int currentLevel;
 	int currentScore;
+	int lostParcels;
+	bool needTarget;
+	bool gameOver;
 
 	PxPhysics* gPhysics;
 	PxScene* gScene;

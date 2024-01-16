@@ -7,8 +7,8 @@ Copter::Copter(PxPhysics* gPhysics, PxScene* gScene, ParticleSystem* pSystem, Ve
 {
 	cam = GetCamera();
 
-	top1 = RigidBody::getStatic(gPhysics, gScene, { pos }, CreateShape(physx::PxBoxGeometry(6, 1, 2)), { 1,0,0,1 });
-	top2 = RigidBody::getStatic(gPhysics, gScene, { pos }, CreateShape(physx::PxBoxGeometry(2, 1, 6)), { 1,0,0,1 });
+	top1 = RigidBody::getStatic(gPhysics, gScene, { pos }, CreateShape(physx::PxBoxGeometry(6, 1, 2)), { 1,0.55,0,1 });
+	top2 = RigidBody::getStatic(gPhysics, gScene, { pos }, CreateShape(physx::PxBoxGeometry(2, 1, 6)), { 1,0.55,0,1 });
 	magnet = pSystem->addRigidBody(RigidBody::getDynamic(gPhysics, gScene, pos - magnetOffset, 1, 0.5, 1, 30, { 0.1,0.1,0.1,1 }));
 
 	pSystem->addForce(chain = new SpringGenerator(-1, 100, 10, pos - magnetOffset, magnet));
