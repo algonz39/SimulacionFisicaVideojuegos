@@ -1,8 +1,6 @@
 #pragma once
 #include "Rigidbody.h"
-#include "Particle.h"
 #include "ParticleGenerator.h"
-#include "RigidBodyGenerator.h"
 #include "ForceGenerator.h"
 #include "Copter.h"
 
@@ -29,6 +27,7 @@ private:
 	std::vector<PxRigidDynamic*> rigidBodys;
 	PxRigidStatic* base, *goal;
 	PxRigidDynamic* target;
+
 
 	double levelCompleted;
 	bool needTarget;

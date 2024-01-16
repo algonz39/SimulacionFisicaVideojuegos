@@ -13,6 +13,7 @@ public:
 	ParticleGenerator(Vector3 Pos, ParticleSystem* Sys, Firework::FireType type,  double Prob = 0.45, double Velocity = 10, double Radius = 5, float duration = -1);
 	~ParticleGenerator();
 	bool generate(double t);
+	void kill();
 
 
 protected: 
@@ -25,6 +26,4 @@ protected:
 	double radius;
 	float duration;
 	bool gausian;
-
-	std::vector<Particle*> particles;
 };

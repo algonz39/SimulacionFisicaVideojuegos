@@ -4,9 +4,10 @@
 class BouyancyForceGenerator : public ForceGenerator
 {
 public:
-	BouyancyForceGenerator(double lTime, Particle* liquidParticle, float height, float volume, float density);
+	BouyancyForceGenerator(double lTime, Vector3 pos, float height, float volume, float density);
 	~BouyancyForceGenerator();
 	void updateForce(Particle* particle) override;
+	void updateForce(PxRigidDynamic* rb) override;
 protected:
 	float height;
 	float volume;

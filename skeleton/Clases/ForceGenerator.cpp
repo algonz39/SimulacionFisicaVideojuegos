@@ -15,6 +15,12 @@ bool ForceGenerator::updateLifeTime(double t)
 	return (time > lifeTime);
 }
 
+void ForceGenerator::kill()
+{
+	lifeTime = 0;
+}
+
+
 void ForceGenerator::addExcluded(Particle* p)
 {
 	excluded.insert(p);

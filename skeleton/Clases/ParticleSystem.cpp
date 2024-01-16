@@ -17,16 +17,16 @@ ParticleSystem::ParticleSystem(PxPhysics* gPhysics, PxScene* gScene) : gPhysics(
 
 
 ParticleSystem::~ParticleSystem() {
-	for (Particle* p : particles) {
-		if(p) delete p;
-	}
-	particles.clear();
-	nParticles = 0;	
 	for (ParticleGenerator* g : generators) {
 		if (g) delete g;
 	}
 	generators.clear();
 	nGenerators = 0;
+	for (Particle* p : particles) {
+		if (p) delete p;
+	}
+	particles.clear();
+	nParticles = 0;
 	for (ForceGenerator* f : forces) {
 		if(f) delete f;
 	}

@@ -13,9 +13,6 @@ ParticleGenerator::ParticleGenerator(Vector3 Pos, ParticleSystem* Sys, Firework:
 
 ParticleGenerator::~ParticleGenerator()
 {
-	for (Particle* p : particles) {
-		if(p != nullptr) p->kill();
-	}
 }
 
 bool ParticleGenerator::generate(double t)
@@ -31,12 +28,16 @@ bool ParticleGenerator::generate(double t)
 			p = new Firework(pos + sys->getRand()->getRandomVector(gausian) * radius, sys->getRand()->getRandomVector(gausian) * velocity, { 0,0,0 }, sys, type);
 
 			sys->addParticle(p);
-			particles.push_back(p);
 		}
 	}
-	if (duration > 0) {
+	if (duration > -1) {
 		duration -= t;
 		if (duration <= 0) return true;
 	}
 	return false;
-} 
+}
+
+void ParticleGenerator::kill()
+{
+	duration = 0;
+}

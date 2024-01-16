@@ -44,7 +44,7 @@ void Copter::move()
 	top2->setGlobalPose(newPose);
 	cam->setEye((movement* SPEED));
 
-	magnetOffset.y += extension * 0.1;
+	magnetOffset.y += extension * 0.15;
 	if (magnetOffset.y < 5) magnetOffset.y = 5;
 	else if (magnetOffset.y > 35) magnetOffset.y = 35;
 	chain->setFPos(top1->getGlobalPose().p - magnetOffset);
@@ -59,9 +59,9 @@ void Copter::move()
 void Copter::addMovement(Vector3 mov)
 {
 	movement += mov;
-	float speed = mov.normalize();
+	float speed = movement.normalize();
 	if (speed > 5) speed = 5;
-	mov* speed;
+	movement *= speed;
 }
 
 void Copter::resetMovement()
@@ -84,6 +84,8 @@ void Copter::reset()
 	top2->setGlobalPose(newPose);
 	newPose.p -= magnetOffset;
 	magnet->setGlobalPose({ newPose });
+	shadowTr.p = newPose.p;
+	shadowTr.p.y = 1;
 	magnet->setAngularVelocity(PxVec3(0.0f, 0.0f, 0.0f));
 	magnet->setLinearVelocity(PxVec3(0.0f, 0.0f, 0.0f));
 	cam->resetPos();
@@ -105,5 +107,10 @@ void Copter::cableTransform()
 		++i;
 	}
 
+}
+
+void Copter::setTarget(PxRigidDynamic* target)
+{
+	magnetF->setTarget(target);
 }
 

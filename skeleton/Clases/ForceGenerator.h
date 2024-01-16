@@ -11,6 +11,7 @@ public:
 	virtual void updateForce(Particle* particle) {}
 	virtual void updateForce(PxRigidDynamic* body) {}
 	bool updateLifeTime(double t);
+	void kill();
 	void addExcluded(Particle* p);
 	void addExcluded(PxRigidDynamic* rb);
 

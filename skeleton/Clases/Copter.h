@@ -18,6 +18,7 @@ public:
 	void reset();
 	void extend(int value);
 	void cableTransform();
+	void setTarget(PxRigidDynamic* target);
 
 private: 
 

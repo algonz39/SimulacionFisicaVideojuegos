@@ -18,14 +18,15 @@ Vector4 Random::getRandomColor() {
 physx::PxShape* Random::getRandomShape(physx::PxMaterial* mat) {
 	physx::PxShape* shape = nullptr;
 	float rn = generate(1);
-	if (rn < 0.5) {
+	if (rn < 0.6) {
 		shape = CreateShape(physx::PxBoxGeometry(generate(3) + 2, generate(3) + 2, generate(3) + 2), mat);
 	}
-	else if (rn < 0.8) {
-		shape = CreateShape(physx::PxCapsuleGeometry(generate(3) + 2, generate(3) + 2), mat);
+	else if (rn < 0.9) {
+		shape = CreateShape(physx::PxSphereGeometry((generate(2) + 1) * 2), mat);
 	}
 	else {
-		shape = CreateShape(physx::PxSphereGeometry(generate(3) + 2), mat);
+		shape = CreateShape(physx::PxCapsuleGeometry((generate(1) + 1.5) * 2, generate(2) + 2), mat);
+
 	}
 	return shape;
 

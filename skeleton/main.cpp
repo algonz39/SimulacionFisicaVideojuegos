@@ -80,42 +80,6 @@ void initPhysics(bool interactive)
 	//pSystem->addForce(new WhirlwindGenerator(25, Vector3(-20, 40, -20), Vector3(100, 100, 100), 5, 1));
 #pragma endregion
 
-#pragma region P4
-
-	//Muelle
-	//Particle* am = pSystem->addParticle(new Particle(Vector3(20, 40, 20), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 1,1,0,1 }, 1, 10)); //Amarillo
-	//Particle* ma = pSystem->addParticle(new Particle(Vector3(30, 40, 30), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 1,0,1,1 }, 1, 10)); //Magenta
-	//pSystem->addForce(new SpringGenerator(-1,5,5,am, ma));
-
-	//Muelle estatico
-	//Particle* gr = pSystem->addParticle(new Particle(Vector3(0, 40, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 10, { 0,1,0,1 }, 1, 25)); //Green
-	//Particle* top = pSystem->addParticle(new Particle(Vector3(0, 50, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 10, { 1,1,1,1 }, 1, 25)); //Gray
-	//pSystem->addForce(new GGenerator(-1, Vector3(0, -9.8, 0)))->addExcluded(top);
-	//pSystem->addForce(new SpringGenerator(-1, 10, 5, gr, Vector3(0,50,0)));
-	//pSystem->addForce(new DragGenerator(-1,Vector3(0,50,0), Vector3(50, 50, 50), Vector3(50,0,0), 1))->addExcluded(top);
-
-	//Slinky
-	//Particle* am = pSystem->addParticle(new Particle(Vector3(10, 50, 10), Vector3(0, 0, -5), Vector3(0, 0, 0), 5, { 1,1,0,1 }, 1, 50)); //Amarillo
-	//Particle* ma = pSystem->addParticle(new Particle(Vector3(10, 45, 10), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 1,0,1,1 }, 1, 50)); //Magenta
-	//Particle* cy = pSystem->addParticle(new Particle(Vector3(10, 40, 10), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 0,1,1,1 }, 1, 50)); //Cian
-	//Particle* ro = pSystem->addParticle(new Particle(Vector3(10, 35, 10), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 1,0,0,1 }, 1, 50)); //Rojo
-	//Particle* ve = pSystem->addParticle(new Particle(Vector3(10, 30, 10), Vector3(0, 0, 0), Vector3(0, 0, 0), 5, { 0,1,0,1 }, 1, 50)); //Verde
-	//pSystem->addForce(new SpringGenerator(-1, 5, 5, am, ma));
-	//pSystem->addForce(new SpringGenerator(-1, 5, 5, ma, cy));
-	//pSystem->addForce(new SpringGenerator(-1, 5, 5, cy, ro));
-	//pSystem->addForce(new SpringGenerator(-1, 5, 5, ro, ve));
-
-
-	//Flotacion
-	//red = pSystem->addParticle(new Particle(Vector3(-20, 40, -20), Vector3(0, 0, 0), Vector3(0, 0, 0), 7000, { 1,0,0,1 }, 10, 1000, Cube)); //Red
-	//Particle* sea = pSystem->addParticle(new Particle(Vector3(-20, 40, -20), Vector3(0, 0, 0), Vector3(0, 0, 0), 1, { 0,0,1,1 }, 30, 1000, Plane)); //Sea
-	//pSystem->addForce(new BouyancyForceGenerator(-1, sea, 10, 10, 1000));
-	//pSystem->addForce(new GGenerator(-1, Vector3(0, -9.8, 0)))->addExcluded(sea);
-
-
-#pragma endregion
-
-
 }
 
 
@@ -202,11 +166,6 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		copter->extend(1);
 		break;
 	}
-	case 'R': {
-		lvlManager->addTarget();
-		break;
-	}
-
 	default:
 		break;
 	}

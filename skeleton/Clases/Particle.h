@@ -1,7 +1,7 @@
 #pragma once
 #include "../core.hpp"
 #include "../RenderUtils.hpp"
-
+using namespace physx;
 enum Shape { Sphere, Cube, Plane };
 
 struct ParticleData {
@@ -10,15 +10,15 @@ struct ParticleData {
 	float radius = 1;
 	float lifeTime = 3.0;
 	Shape shape = Sphere;
+	PxQuat rotation = PxQuat(PxIdentity);
 };
-
 
 const std::vector<Vector4> color = { {1,0,0,1},{0,1,0,1},{0,0,1,1} };
 
 class Particle 
 {
 public:
-	Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc, float mass = 1, Vector4 color = {0,1,0,1}, float radius = 1, float lifeTime = 3.0, Shape shape = Sphere, double Damp = 0.998);
+	Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc, float mass = 1, Vector4 color = {0,1,0,1}, float radius = 1, float lifeTime = 3.0, Shape shape = Sphere, PxQuat rotation = PxQuat(PxIdentity), double Damp = 0.998);
 	Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc, ParticleData Data, double Damp = 0.998);
 	virtual ~Particle();
 
