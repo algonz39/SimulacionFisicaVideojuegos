@@ -139,7 +139,7 @@ void renderLoop()
 	StartCounter();
 	sCamera = new Camera(PxVec3(50.0f, 55.0f, 50.0f), PxVec3(-1.0f, -1.0f, -1.0f));
 
-	setupDefaultWindow("Simulacion Fisica Videojuegos");
+	setupDefaultWindow("Amazon Dron Delivery");
 	setupDefaultRenderState();
 
 	glutIdleFunc(idleCallback);
